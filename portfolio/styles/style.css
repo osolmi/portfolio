@@ -1,0 +1,196 @@
+:root{
+    --white: #fff;
+    --black: #000;
+    --gray: #828282;
+    --point: #ffa32c;
+}
+
+*{ box-sizing: border-box; margin:0; padding:0; }
+
+html, body{
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+/* 전역 커스텀 커서 */
+body{
+    cursor:none;/* OS 데스크탑 기본 커서 숨김 */
+}
+a, button, [data-cursor]{
+    cursor: none;
+}
+@media (hover:none){
+    body{cursor:auto;}/* 터치 기기는 유지 */
+}
+
+.cursor{
+    position: fixed;
+    top: 0; left: 0;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background:transparent;
+    backdrop-filter: invert(1); /* 커서 뒤 화면 픽셀 컬러 반전 */
+    -webkit-backdrop-filter: invert(1);/* safari 용 */
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(.16,1,.3,1), height .3s cubic-bezier(.16,1,.3,1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (hover: none){
+    .cursor{display: none;}
+}
+
+.cursor .is-hovering{
+    width: 76px;
+    height: 30px;
+}
+
+/* 커서 옵션 B - 포인트 컬러 버전 */
+.cursor .is-solid{
+    background: var(--point);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.cursor .is-solid .cursor__label{
+    color: var(--white);
+    mix-blend-mode: normal;
+}
+
+.cursor__label{
+    font-size: 12px;
+    letter-spacing:0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.cursor .is-hovering .cursor__label{
+    opacity: 1;
+}
+
+/* 전 페이지 공통 NAV */
+.nav{
+    position: relative;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 50px;
+}
+
+.nav__logo img{/* png버전 */
+    width:10.813em; height: auto;
+}
+/* .nav__logo {
+    font-family:'Nohemi', sans-serif;
+    font-size:2.25rem; font-weight:500;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-left: 0.2em;
+    vertical-align: top; 
+}
+.nav__logo sup{
+    font-size: 0.625rem; font-weight:300;
+} */
+
+.nav__links{display: flex; gap: 150px;}
+/* 중앙 로고 마크 자리 — 실제 로고로 교체 전까지 회색 네모로 표시 */
+.nav__mark{
+    width: 90px;
+    height: 60px;
+    background: var(--gray);
+    display: block;
+    position:absolute; left: 50%;
+}
+
+/* ------------------------slide wrapper - 세로 scroll */
+.slide-wrapper{
+    height: 100vh;
+    height: 100svh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    
+    /* 스크롤 기능은 유지하되, 브라우저 기본 스크롤바만 시각적으로 숨김
+     (브라우저마다 숨기는 속성이 달라서 3개 다 필요함) */
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* 구형 Edge/IE */
+}
+.slide-wrapper::-webkit-scrollbar{
+  display: none;               /* Chrome, Safari, 최신 Edge */
+}
+
+.slide{
+    height: 100vh;
+    height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding:50px;
+    overflow: hidden;
+}
+
+/* ================= Cover ================= */
+.slide--cover{
+    display: flex; flex-direction: column;
+    justify-content:center; align-items:center;
+}
+.cover__wordmark {
+    font-family: 'Nohemi', sans-serif;
+    font-size: 9.375rem; /* 150px 반응형 대응 */
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #000;
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+}
+.slide--cover h1 sup{
+    font-family: 'Nohemi', sans-serif;
+    font-size:1rem; font-weight:300;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-left: 0.2em;
+    top: 0.2em;
+    position: relative;
+}
+.slide--cover .cover__scroll{
+    position: absolute;
+    bottom: 3.125rem;/* 화면 하단에서 50px 여백 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+.slide--cover .cover__scroll::after{
+    content: '';
+    display: block;
+    width: 0.8px;
+    height: 40px;
+    background-color: var(--black);
+}
+/* ================= About ================= */
+/* ================= Work ================= */
+/* ================= Graphic ================= */
+
+.graphic-scroll {}
+.graphic-scroll h2 {
+    font-family: 'Nohemi', sans-serif;
+    font-size:4rem; font-weight:500;
+}
+
+.graphic-scroll h2 sup {
+    font-family: 'Nohemi', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;        /* 300은 이 크기에서 너무 얇아 흐릿해 보일 수 있음, 아래 설명 */
+    letter-spacing: 0.05em;
+    line-height: 1;
+    margin-left: 0.2em;
+    vertical-align: top;      /* position/top 대신 이걸로 교체 */
+}
