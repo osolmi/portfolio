@@ -1,0 +1,87 @@
+:root {
+    --nca-point:#A8D8CC;
+    --nca-dark:#3C3C3C;
+    --nca-grey:#7E7E7E;
+    --nca-white:#fff;
+
+    --nca-padding:0 3.125rem
+}
+
+h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point);}
+/* 띠배너 */
+.ticker-banner{
+    height: 2rem;
+    overflow:hidden; background:var(--nca-point); flex-shrink: 0;
+}
+.ticker-track{
+    display:flex;
+    width:max-content;
+    animation: ticker 28s linear infinite;
+}
+.ticker-item{
+    padding:10px 80px;
+    color:var(--nca-dark);
+    font-size:12px; font-weight: 600;
+    white-space:nowrap;
+}
+@keyframes ticker{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+}
+
+/* 내비 */
+header{
+    position:fixed;left:0; right:0;
+    height:6.375rem;
+    z-index:100;
+    display: flex; flex-direction: column;
+    background:rgba(255,255,255,0.15);   /* 반투명 — 뒤 배경(히어로 이미지)이 비침 */
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+}
+.gnb{
+    position:relative;
+    height:4.375rem; flex-shrink: 0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 50px;
+}
+.nav_left, .nav_right{
+    display:flex; align-items:center; gap:1.875rem;
+}
+.gnb *{
+    font-size: 0.875rem; font-weight:500;
+    color: var(--nca-white);
+}
+.gnb h1{
+    position:absolute; left:50%; top:50%;
+    transform:translate(-50%, -50%);
+}
+.gnb h1 img{ width:8.75rem; }
+
+/* 히어로 배너 슬라이드 */
+.hero_section{ position:relative; height:100vh; overflow:hidden; }
+.hero-swiper,
+.hero-swiper .swiper-slide,
+.hero-swiper img{ width:100%; height:100%; object-fit:cover; }
+
+.hero_fixed{
+    position:absolute; inset:0;
+    z-index:99; /* swiper보다 위 레이어 */
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center; color:#fff;
+    pointer-events:none; /* 슬라이드 스와이프 방해 안 하게, 버튼만 아래서 다시 켜줌 */
+    padding:var(--nca-padding);
+}
+.hero_fixed h1{ font-size:1.5rem; font-weight: 600; color: var(--nca-white);}
+.hero_fixed p{ margin-top:12px; color: var(--nca-white);}
+.hero_fixed .shop_btn{
+    pointer-events:auto;
+    margin-top:1; padding:12px 32px;
+    border:1px solid #fff; color:#fff;
+}
+
+/* 베스트 슬라이드 */
+.best{ padding:80px 40px; }
+.best-swiper .swiper-slide{
+    aspect-ratio:3/4;
+    background:#eee;
+}
