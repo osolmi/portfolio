@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herman Miller Store</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="shortcut icon" href="./images/symbol_red.png" type="image/x-icon">
+</head>
+<body>
+    <!-- ============ HEADER ============ -->
+<header class="topbar">
+    <div class="left">
+        <button class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    </div>
+    <a href="./index.html" class="logo"><img src="./images/logo.png" alt="logo"></a>
+    <div class="right">
+        <a href="./images/acount.png" class="nav-icon" aria-label="Account"></a>
+        <a href="./images/wish.png" class="nav-icon" aria-label="Wishlist"></a>
+        <a href="./images/cart.png" class="nav-icon" aria-label="Cart"></a>
+    </div>
+</header>
+<!-- ============ HERO ============ -->
+<section class="hero" style="padding:0;">
+    <div class="hero-mask">
+        <div class="hero-mask-inner" id="heroMaskInner">
+            <div class="ph" data-slide="0">[ Eames Lounge Chair — Living Room ]</div>
+            <div class="ph" data-slide="1" style="opacity:0">[ Noguchi Table — Detail ]</div>
+            <div class="ph" data-slide="2" style="opacity:0">[ Nelson Bubble Lamp — Interior ]</div>
+        </div>
+    </div>
+    
+    <div class="hero-right">
+        <div class="hero-meta">
+            <div>HERMANMILLER<br>SINCE 1923</div>
+            <div>FOUNDED BY<br>D.J. DE PREE</div>
+            <p><img src="./images/symbol_white.png" alt="symbol"></p>
+        </div>
+        <div class="hero-copy">
+            <div>the power of design<br>To make things better</div>
+            <div>furniture from herman miller<br>Curated for a room that means it.</div>
+        </div>
+        <div class="hero-logo"><img src="./images/logo_hero.png" alt=""></div>
+    </div>
+    <div class="hero-slider" id="heroSlider">
+        <div class="hero-slider-track">
+            <div class="hero-slider-fill" id="heroSliderFill" style="height:0%"></div>
+            <div class="hero-slider-handle" id="heroSliderHandle" style="bottom:0%"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BESTSELLERS ============ -->
+<section class="wraps">
+    <h2 class="title">Bestsellers</h2>
+    <div class="best-grid">
+        <ul class="tab-list" id="tabList">
+            <span class="tab-dot" id="tabDot"></span>
+            <li data-tab="office">Office Chairs</li>
+            <li data-tab="lounge">Lounge Chairs &amp; Ottomans</li>
+            <li data-tab="coffee" class="active">Coffee Tables</li>
+            <li data-tab="dining">Dining</li>
+            <li data-tab="desks">Desks</li>
+            <li data-tab="gaming">Gaming Chairs</li>
+            <li data-tab="storage">Storage</li>
+            <li data-tab="decor">Decor</li>
+        </ul>
+        <div class="product-grid" id="bestsellerGrid"></div>
+    </div>
+</section>
+
+<!-- ============ MD'S PICK ============ -->
+<section class="wrap">
+    <h2 class="title">MD's Pick</h2>
+    <div class="mdpick-grid">
+        <div class="mdpick-feature">
+            <div class="product-thumb"></div>
+            <div class="product-name">Eames Aluminum Group Lounge Chair</div>
+            <div class="product-price-bf">$695.00 - $890.00</div>
+            <div class="product-price-af">$521.25 - $667.50</div>
+            <div class="sale_badge">25% off</div>
+        </div>
+        <div class="mdpick-list" id="mdPickList"></div>
+    </div>
+</section>
+<!-- ============ COLLECTION ============ -->
+<section class="collection-section">
+    <h2 class="section-title">Collection</h2>
+    <div class="collection-container">
+        <!-- 메인 인테리어 이미지 및 핫스팟 영역 -->
+        <div class="main-image-wrap">
+            <button type="button" class="hotspot" data-id="1" style="top: 58%; left: 14%;">1</button>
+            <button type="button" class="hotspot" data-id="2" style="top: 43%; left: 26%;">2</button>
+            <button type="button" class="hotspot" data-id="3" style="top: 29%; left: 37%;">3</button>
+            <button type="button" class="hotspot" data-id="4" style="top: 64%; left: 45%;">4</button>
+            <button type="button" class="hotspot active" data-id="5" style="top: 49%; left: 61%;">5</button>
+        </div>
+
+        <!-- 우측 상세 정보 카드 -->
+        <div class="product-card">
+            <!-- [상단 영역] 사진 + 양옆 화살표 + 좌측하단 큰 번호 -->
+            <div class="card-top">
+                <button type="button" class="nav-btn prev-btn" aria-label="이전"><img src="" alt=""></button>
+                <p class="card-image">
+                    <img src="product-5.jpg" alt="Eames Molded Plywood">
+                </p>
+                <button type="button" class="nav-btn next-btn" aria-label="다음"><img src="" alt=""></button>
+                
+                <!-- 이미지 좌측 하단에 들어가는 포인트 번호 -->
+                <span id="card-num" class="product-num">05</span>
+            </div>
+            <!-- [하단 영역] 제품명 + 표 -->
+            <div class="card-bottom">
+                <h3 id="card-name" class="product-name">EAMES MOLDED PLYWOOD</h3>
+                <table class="product-spec">
+                    <tr>
+                        <th>Material</th>
+                        <td id="card-material">Walnut veneer, molded plywood</td>
+                    </tr>
+                    <tr>
+                        <th>Year</th>
+                        <td id="card-year">1946</td>
+                    </tr>
+                    <tr>
+                        <th>Designer</th>
+                        <td id="card-designer">Charles & Ray Eames</td>
+                    </tr>
+                    <tr>
+                        <th>Price</th>
+                        <td id="card-price">
+                        <span class="sale-price">$1,895</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============ NEW IN ============ -->
+<section class="wrap newin-wrap">
+    <h2 class="sec-title">New In</h2>
+    <div class="newin-row-wrap">
+        <div class="newin-row" id="newInRow"></div>
+    </div>
+    <div class="newin-nav">
+        <button class="newin-arrow" id="newInPrev" aria-label="Previous"><img src="" alt=""></button>
+        <button class="newin-arrow" id="newInNext" aria-label="Next"><img src="" alt=""></button>
+    </div>
+</section>
+<!-- ============ CATEGORY ============ -->
+<!-- ============ POPULAR DESIGNERS ============ -->
+<section>
+    <div class="wrap designers-wrap">
+        <h2 class="sec-title" style="margin-bottom:0;">Popular<br>Designers</h2>
+        <div class="designers-list">
+            <div class="designer">
+                <div class="designer-photo"><div class="designer-overlay">Explore</div></div>
+                <div class="designer-name">Charles &amp; Ray Eames</div>
+            </div>
+            <div class="designer">
+                <div class="designer-photo"><div class="designer-overlay">Explore</div></div>
+                <div class="designer-name">Alexander Girard</div>
+            </div>
+            <div class="designer">
+                <div class="designer-photo"><div class="designer-overlay">Explore</div></div>
+                <div class="designer-name">George Nelson</div>
+            </div>
+            <div class="designer">
+                <div class="designer-photo"><div class="designer-overlay">Explore</div></div>
+                <div class="designer-name">Isamu Noguchi</div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============ HERITAGE ============ -->
+<section class="wrap">
+    <div class="heritage-grid">
+        <div class="heritage-photo"><img src="" alt=""></div>
+        <div class="heritage-copy">
+            <h2 class="sec-title" style="margin-bottom:0;">Heritage</h2>
+            <p>At Herman Miller, we believe in the power of design to make things better for people.</p>
+            <p>For over a century, a handful of designers shaped not just Herman Miller, but modern life itself. These pieces weren't designed to trend. They were designed to last.</p>
+        </div>
+    </div>
+</section>
+</body>
+</html>
