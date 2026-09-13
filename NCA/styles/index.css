@@ -3,11 +3,12 @@
     --nca-dark:#3C3C3C;
     --nca-grey:#7E7E7E;
     --nca-white:#fff;
-
-    --nca-padding:0 3.125rem
+    
+    --nca-padding-tb:6.25rem;
+    --nca-padding-lr:3.125rem;
 }
 
-h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point);}
+h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point); /* padding-left:var(--nca-padding-lr); */}
 /* 띠배너 */
 .ticker-banner{
     height: 2rem;
@@ -29,7 +30,7 @@ h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point);}
     to{ transform:translateX(-50%); }
 }
 
-/* 내비 */
+/* ========================== 내비 */
 header{
     position:fixed;left:0; right:0;
     height:6.375rem;
@@ -58,7 +59,7 @@ header{
 }
 .gnb h1 img{ width:8.75rem; }
 
-/* 히어로 배너 슬라이드 */
+/* =========================== 히어로 배너 슬라이드 */
 .hero_section{ position:relative; height:100vh; overflow:hidden; }
 .hero-swiper,
 .hero-swiper .swiper-slide,
@@ -67,21 +68,277 @@ header{
 .hero_fixed{
     position:absolute; inset:0;
     z-index:99; /* swiper보다 위 레이어 */
-    display:flex; flex-direction:column; align-items:flex-start; justify-content:center; color:#fff;
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap: 1rem;
+    color:#fff;
     pointer-events:none; /* 슬라이드 스와이프 방해 안 하게, 버튼만 아래서 다시 켜줌 */
-    padding:var(--nca-padding);
+    padding-left:var(--nca-padding-lr);
 }
-.hero_fixed h1{ font-size:1.5rem; font-weight: 600; color: var(--nca-white);}
-.hero_fixed p{ margin-top:12px; color: var(--nca-white);}
+.hero_fixed h1{ font-size:1.5rem; font-weight: 600; color: var(--nca-white); line-height: 1.1;}
+.hero_fixed p{color: var(--nca-white);}
 .hero_fixed .shop_btn{
     pointer-events:auto;
     margin-top:1; padding:12px 32px;
-    border:1px solid #fff; color:#fff;
+    border:1px solid var(--nca-white); color:var(--nca-white);
 }
 
-/* 베스트 슬라이드 */
-.best{ padding:80px 40px; }
-.best-swiper .swiper-slide{
-    aspect-ratio:3/4;
-    background:#eee;
+/* ========================== 베스트 슬라이드 */
+.best{ padding:var(--nca-padding-tb) var(--nca-padding-lr);}
+.best .best-swiper {
+    width: 100%;
 }
+.best-swiper .swiper-slide{
+    /* aspect-ratio:3/4; */
+    flex: 1;
+}
+.best-swiper .swiper-slide a {
+    display: flex; flex-direction: column;
+    padding-top:4.688rem;
+}
+.best-swiper .swiper-slide a img {}
+.best-swiper .swiper-slide a span {color: var(--nca-dark); font-size: 0.875rem;}
+
+/* ========================== 어바웃 */
+.about {display: flex; height: 45.2rem; padding: var(--nca-padding-);}
+.about_right { flex: 0.55; }
+.about_right img {width: 100%; height: auto;}
+.about_left {
+    flex: 0.45; display: flex; flex-direction: column; gap: 2.5rem;
+    padding-left: 1.875rem; padding-right: 3.125;
+}
+.about_left .about_top{
+    color: var(--nca-point);
+    font-size: 1.5rem; font-weight: 600; line-height: 1.4;
+}
+.about_left .about_btm{
+    display: flex; flex-direction: column;
+    gap:0.8rem;
+}
+.about_left .about_btm *{
+    color: var(--nca-dark);
+    font-size: 0.875rem; line-height: 1.4;
+}
+
+/* ========================== 룩북 */
+.lookbook{ display:flex; padding: var(--nca-padding);}
+.lookbook_left {flex: 1}
+.lookbook_left img {width: 100%; height: auto; display: block; object-fit: cover;}
+.lookbook_right {flex: 1; display: flex; flex-flow: column; align-items: center; text-align: center;}
+.lookbook-swiper {
+    width: 100%;
+    padding: 1.25rem 0;
+    position: relative;
+}
+.lookbook-swiper .swiper-slide{ position:relative; }
+.lookbook-swiper .hotspot{
+    position:absolute; top:16px; right:16px;
+    width:28px; height:28px; border-radius:50%;
+    background:#fff; font-size:12px;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity .25s ease;
+}
+/* Swiper가 활성 슬라이드에 자동으로 붙여주는 클래스 */
+.lookbook-swiper .swiper-slide-active .hotspot{
+    opacity:1; pointer-events:auto;
+}
+
+/* ========================== GTL ===== */
+.gtl h2 {font-size: 4rem; padding-left: var(--nca-padding-lr); margin-bottom: 0.625rem;}
+.gtl p {padding-left: var(--nca-padding-lr); margin-bottom: 1.875rem; color: var(--nca-dark);}
+.gtl_wrap{ display:flex;}
+.gtl_wrap > * {
+    flex:1; text-align:left; cursor:pointer;
+    aspect-ratio: 3 / 4;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.gtl_wrap > * span {
+    position: absolute;
+    bottom: 0.625rem;
+    left: 0.625rem;
+    color: var(--nca-white);
+    font-size: 0.875rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.gtl_wrap > *::after{
+    content: '';
+    position: absolute;
+    top: 0.625rem;
+    right: 0.625rem;
+    width: 1.25rem; height: 1.25rem;
+    background-image: url(../images/insta_white.png);
+    background-size: contain;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+.gtl_1 {background-image: url(../images/gtl/1.jpg);}
+.gtl_2 {background-image: url(../images/gtl/2.jpg);}
+.gtl_3 {background-image: url(../images/gtl/3.jpg);}
+.gtl_4 {background-image: url(../images/gtl/4.jpg);}
+.gtl_5 {background-image: url(../images/gtl/5.jpg);}
+
+/* ===== GTL 팝업 ===== */
+.popup_overlay{
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.6);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden;
+    transition:opacity .25s ease;
+    z-index:100;
+}
+.popup_overlay.is-active{ opacity:1; visibility:visible; }
+
+.popup_box{
+    position:relative;
+    display:flex;
+    background:#fff;
+    max-width:900px; width:90%;
+}
+.popup_close{
+    position:absolute; top:12px; right:12px;
+    font-size:24px; line-height:1;
+}
+.popup_left{ flex:1; }
+.popup_left img{ width:100%; height:100%; object-fit:cover; }
+.popup_left .popup_handle{ display:block; padding:8px; }
+
+.popup_right{ flex:1; display:flex; flex-direction:column; padding:40px; gap:24px; }
+.popup_product img{ width:100%; aspect-ratio:3/4; background:#eee; margin-bottom:8px; }
+.popup_shop_btn{
+    display:block; margin-top:8px; padding:10px; text-align:center;
+    border:1px solid #000;
+}
+
+/* ========================== footer */
+footer {
+    background-color: var(--nca-dark);
+    color: var(--nca-point);
+    padding: var(--nca-padding-lr);
+}
+
+.footer_top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 6.25rem;
+}
+
+.footer-col {
+    display: flex;
+    flex: 1;
+    gap: 5rem;
+}
+
+.footer-menu-group dt {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+    color: var(--nca-point);
+}
+
+.footer-menu-group dd {
+    margin-bottom: 0.5rem;
+}
+
+.footer-menu-group dd a {
+    color: #888;
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+/* SOCIALS 그룹의 dd 태그들을 가로 정렬 */
+/* SOCIALS 전체 박스 (세로 배치) */
+.footer-menu-group.socials {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 제목 (SOCIALS) */
+.social_title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--nca-point);
+    margin-bottom: 0.625rem;
+}
+
+.social_icons {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem; /* 아이콘 사이 간격 10px */
+}
+
+/* 아이콘 크기 지정 */
+.social_icons a {
+    isplay: inline-flex;
+}
+
+.social_icons img {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
+}
+
+.footer_divider {
+    width: 1px; height: 6.25rem;
+    background-color: #555;
+    margin: 0 2.5rem;
+}
+
+.footer-top-right {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.signup p {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.625rem;
+    color: var(--nca-point);
+}
+
+.signup_btn {
+    display: inline-block;
+    width: 18.75rem;
+    padding: 0.625rem 0;
+    border-radius: 0.25rem;
+    background-color: var(--nca-grey);
+    color: var(--nca-dark);
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.footer-top-right > p {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--nca-point);
+}
+
+.footer_btm {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 1.25rem;
+}
+
+.footer_btm_left {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.25rem;
+}
+
+.footer_btm_left img {width: 10.72rem; height: auto;}
+
+.footer_btm_left a {
+    color: var(--nca-grey);
+    font-size: 0.75rem;
+}
+
+.footer-bottom-right {
+    display: flex; flex-direction: column; gap: 0.375rem;
+    text-align: right;
+    font-size: 0.75rem;
+}
+
+.footer-bottom-right p {color: var(--nca-grey);}
