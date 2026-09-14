@@ -7,13 +7,27 @@
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="shortcut icon" href="./images/symbol_red.png" type="image/x-icon">
+    <script src="./scripts/index.js" defer></script>
 </head>
 <body>
+    <style>
+        /* Chrome, Safari, Opera, Edge */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox 및 표준 */
+html, body {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+    </style>
     <!-- ============ HEADER ============ -->
 <header class="topbar">
     <div class="left">
-        <button class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-        <button class="icon-btn" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button class="icon-btn" aria-label="Menu"><img src="" alt=""></button>
+        <button class="icon-btn" aria-label="Search"><img src="" alt=""></button>
     </div>
     <a href="./index.html" class="logo"><img src="./images/logo.png" alt="logo"></a>
     <div class="right">
@@ -23,37 +37,42 @@
     </div>
 </header>
 <!-- ============ HERO ============ -->
-<section class="hero" style="padding:0;">
-    <div class="hero-mask">
-        <div class="hero-mask-inner" id="heroMaskInner">
-            <div class="ph" data-slide="0">[ Eames Lounge Chair — Living Room ]</div>
-            <div class="ph" data-slide="1" style="opacity:0">[ Noguchi Table — Detail ]</div>
-            <div class="ph" data-slide="2" style="opacity:0">[ Nelson Bubble Lamp — Interior ]</div>
+<section class="hero">
+    <!-- 좌측 -->
+    <div class="hero-symbol">
+        <div class="hero-slides" id="heroSlides">
+            <div class="hero-slide active" data-slide="0"></div>
+            <div class="hero-slide" data-slide="1"></div>
+            <div class="hero-slide" data-slide="2"></div>
         </div>
+        <p class="hero-vector"><img src="./images/Vector_hero.png" alt=""></p>
+        <div class="hero-symbol-label"><img src="./images/logo_hero_red.png" alt="logo"></div>
     </div>
-    
+    <!-- 우측 -->
     <div class="hero-right">
-        <div class="hero-meta">
+        <div class="hero-top">
             <div>HERMANMILLER<br>SINCE 1923</div>
             <div>FOUNDED BY<br>D.J. DE PREE</div>
             <p><img src="./images/symbol_white.png" alt="symbol"></p>
         </div>
-        <div class="hero-copy">
-            <div>the power of design<br>To make things better</div>
-            <div>furniture from herman miller<br>Curated for a room that means it.</div>
+        <div class="hero-btm-group">
+            <div class="hero-btm">
+                <div>the power of design<br>To make things better</div>
+                <div>furniture from herman miller<br>Curated for a room that means it.</div>
+            </div>
+            <div class="hero-logo"><img src="./images/logo_hero.png" alt=""></div>
         </div>
-        <div class="hero-logo"><img src="./images/logo_hero.png" alt=""></div>
     </div>
+    <!-- 세로 슬라이더 -->
     <div class="hero-slider" id="heroSlider">
-        <div class="hero-slider-track">
-            <div class="hero-slider-fill" id="heroSliderFill" style="height:0%"></div>
-            <div class="hero-slider-handle" id="heroSliderHandle" style="bottom:0%"></div>
-        </div>
+        <div class="slidebar-seg"><div class="fill" data-seg="0"></div></div>
+        <div class="slidebar-seg"><div class="fill" data-seg="1"></div></div>
+        <div class="slidebar-seg"><div class="fill" data-seg="2"></div></div>
     </div>
 </section>
 
 <!-- ============ BESTSELLERS ============ -->
-<section class="wraps">
+<section class="bs-wraps">
     <h2 class="title">Bestsellers</h2>
     <div class="best-grid">
         <ul class="tab-list" id="tabList">
@@ -140,7 +159,7 @@
 </section>
 <!-- ============ NEW IN ============ -->
 <section class="wrap newin-wrap">
-    <h2 class="sec-title">New In</h2>
+    <h2 class="title">New In</h2>
     <div class="newin-row-wrap">
         <div class="newin-row" id="newInRow"></div>
     </div>
@@ -153,7 +172,7 @@
 <!-- ============ POPULAR DESIGNERS ============ -->
 <section>
     <div class="wrap designers-wrap">
-        <h2 class="sec-title" style="margin-bottom:0;">Popular<br>Designers</h2>
+        <h2 class="title" style="margin-bottom:0;">Popular<br>Designers</h2>
         <div class="designers-list">
             <div class="designer">
                 <div class="designer-photo"><div class="designer-overlay">Explore</div></div>
@@ -179,7 +198,7 @@
     <div class="heritage-grid">
         <div class="heritage-photo"><img src="" alt=""></div>
         <div class="heritage-copy">
-            <h2 class="sec-title" style="margin-bottom:0;">Heritage</h2>
+            <h2 class="title" style="margin-bottom:0;">Heritage</h2>
             <p>At Herman Miller, we believe in the power of design to make things better for people.</p>
             <p>For over a century, a handful of designers shaped not just Herman Miller, but modern life itself. These pieces weren't designed to trend. They were designed to last.</p>
         </div>
