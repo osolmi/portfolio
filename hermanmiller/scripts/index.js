@@ -1,4 +1,124 @@
-/* ================= DATA ================= */
+/* =================  내비 데이터 ================= */
+const navData = {
+    living:   { sub:["View All","Living Room","Lounge Chairs & Ottomans","Sofas & Sectionals","Coffee & Side Tables","Benches & Stools","Side Chairs","Living Room Storage","Shelving & Storage"], caption:"Relax in the Eames Lounge Chair and Ottoman", img:"./images/nav/living.jpg" },
+    dining:   { sub:["View All","Dining Tables","Dining Chairs & Stools","Buffets, Sideboards & Credenzas"], caption:"Set the table with Eames Dining Chairs", img:"./images/nav/dining.jpg" },
+    lighting: { sub:["View All","Ceiling Lights & Pendants","Desk & Table Lamps","Floor Lamps","Wall Lights & Sconces"], caption:"Shop Nelson Bubble Lamps", img:"./images/nav/lighting.jpg" },
+    eames:    { sub:["View All","Lounge Chairs & Ottomans","Dining Chairs","Molded Plywood Collection","Storage & Shelving"], caption:"65 Years of the Eames Lounge Chair" },
+    office:   { sub:["View All","Office Chairs","Aeron Chair","Standing Desks","Home Office Storage","Gaming Chairs & Desks"], caption:"Try Our Office Chair Quiz", img:"./images/nav/office.jpg" },
+    gaming:   { sub:["Gaming Chairs","Gaming Desks","Gaming Accessories","Gaming Sale: Up to 25% Off","Logitech G"], caption:"Find your ideal gaming chair with our quiz", img:"./images/nav/gaming.jpg" },
+    decor:    { sub:["View All","Wall Decor & Art","Rugs","Decorative Objects","Pillows & Throws","Clocks"], caption:"Shop Eames Hang-It-All", img:"./images/nav/decor.jpg" },
+    sale:     { sub:["Fall Sale: 25% Off","Markdowns: Up to 40% Off"], caption:"" }
+};
+
+/* ================= 엘리먼트 참조 ================= */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navOverlay = document.getElementById('navOverlay');
+const navCatList = document.getElementById('navCatList');
+const navCatItems = navCatList.querySelectorAll('li');
+const navCatDot = document.getElementById('navCatDot');
+const navSubList = document.getElementById('navSubList');
+const navFeatureCaption = document.getElementById('navFeatureCaption');
+const navFeatureImg = document.querySelector('.nav-feature-img img');
+
+/* ================= dot 이동 ================= */
+function moveNavCatDot(li){
+    if(!navCatDot || !li) return;
+    navCatDot.style.top = (li.offsetTop + li.offsetHeight/2 - 3) + 'px';
+    }
+
+/* ================= 하위메뉴 렌더링 ================= */
+function renderNavSub(key){
+    const d = navData[key];
+    if(!d) return;
+    // 1. 서브메뉴 목록 출력
+    navSubList.innerHTML = d.sub.map(s => `<li>${s}</li>`).join('');
+    // 2. 우측 캡션 적용
+    navFeatureCaption.textContent = d.caption || '';
+    // 3. 이미지 유무 체크 및 처리
+    if (navFeatureImg) {
+        if (d.img && d.img.trim() !== '') {
+            navFeatureImg.src = d.img;
+            navFeatureImg.alt = d.caption || key;
+            navFeatureImg.style.display = 'block'; // 이미지가 있으면 보이기
+        } else {
+            navFeatureImg.src = '';
+            navFeatureImg.style.display = 'none';  // 이미지가 없으면 숨기기
+        }
+    }
+}
+
+navCatItems.forEach(li => {
+    li.addEventListener('click', () => {
+    navCatItems.forEach(x => x.classList.remove('active'));
+    li.classList.add('active');
+    moveNavCatDot(li);
+    renderNavSub(li.dataset.cat);
+    });
+});
+
+/* ================= 열기 / 닫기 (햄버거 하나로 토글) ================= */
+function openNav(){
+    hamburgerBtn.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // 오버레이가 보이게 된 후 dot 위치 재계산 (숨김 상태에서는 offsetTop이 0으로 잡히므로)
+    requestAnimationFrame(() => {
+    const activeCatLi = navCatList.querySelector('li.active');
+    if (activeCatLi) moveNavCatDot(activeCatLi);
+    });
+}
+function closeNav(){
+    hamburgerBtn.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+hamburgerBtn.addEventListener('click', () => {
+    navOverlay.classList.contains('open') ? closeNav() : openNav();
+});
+
+/* ESC 키로도 닫히게 */
+document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && navOverlay.classList.contains('open')) closeNav();
+});
+
+/* ================= 초기 실행 ================= */
+renderNavSub('living');
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. 히어로 세로 슬라이더
+    const SLIDE_DURATION = 6000;
+    const slides = document.querySelectorAll('.hero-slide');
+    const fills = document.querySelectorAll('.slidebar-seg .fill');
+    let current = 0;
+    let startTime = null;
+
+    function setSlide(i){
+        if(slides.length === 0) return;
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+        fills.forEach((f, idx) => { f.style.height = idx < i ? '100%' : '0%'; });
+        current = i;
+        startTime = null;
+        requestAnimationFrame(() => requestAnimationFrame(tick));
+    }
+    
+    function tick(ts){
+        if(startTime === null) startTime = ts;
+        const elapsed = ts - startTime;
+        const pct = Math.min(100, (elapsed / SLIDE_DURATION) * 100);
+        if(fills[current]) fills[current].style.height = pct + '%';
+        
+        if(elapsed < SLIDE_DURATION){
+            requestAnimationFrame(tick);
+        } else {
+            setSlide((current + 1) % slides.length);
+        }
+    }
+
+    setSlide(0);
+
+/* ================= Bestsellers DATA ================= */
 const bestsellerData = {
     office:  [
         {name:"Aeron Chair", originalPrice: "$2,895.00 - $3,195.00", price:"$1,555.00 - $2,745.00", discount: "25% off", img:"./images/bs/1.png"},
@@ -50,39 +170,6 @@ const bestsellerData = {
     ]
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. 히어로 세로 슬라이더
-    const SLIDE_DURATION = 6000;
-    const slides = document.querySelectorAll('.hero-slide');
-    const fills = document.querySelectorAll('.slidebar-seg .fill');
-    let current = 0;
-    let startTime = null;
-
-    function setSlide(i){
-        if(slides.length === 0) return;
-        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-        fills.forEach((f, idx) => { f.style.height = idx < i ? '100%' : '0%'; });
-        current = i;
-        startTime = null;
-        requestAnimationFrame(() => requestAnimationFrame(tick));
-    }
-    
-    function tick(ts){
-        if(startTime === null) startTime = ts;
-        const elapsed = ts - startTime;
-        const pct = Math.min(100, (elapsed / SLIDE_DURATION) * 100);
-        if(fills[current]) fills[current].style.height = pct + '%';
-        
-        if(elapsed < SLIDE_DURATION){
-            requestAnimationFrame(tick);
-        } else {
-            setSlide((current + 1) % slides.length);
-        }
-    }
-
-    setSlide(0);
-
     // 2. 베스트셀러 탭 및 카드 렌더링
     const tabList = document.getElementById('tabList');
     const tabDot = document.getElementById('tabDot');
@@ -110,7 +197,7 @@ function renderBestsellers(key){
         </div>
     `).join('');
 }
-
+        //
         function moveDot(li){
             if(!tabDot || !li) return;
             tabDot.style.top = (li.offsetTop + li.offsetHeight/2 - 3) + 'px';
@@ -151,30 +238,36 @@ const roomProducts = [
     {num:"05", name:"Eames Molded Plywood Lounge Chair", material:"Walnut veneer, molded plywood", year:"1946", designer:"Charles & Ray Eames", price:"$1,895.00", img: "./images/collecion/chair.png", x:74, y:52}
 ];
 
-//======================== New In
+// ======================== New In 데이터 ========================
 const newInData = [
-    {name:"Pursuit Rug by Edith Van Berkel", price:"$2,145.00 - $9,295.00", img:"./images/new/1.png"},
-    {name:"Luva Modular Sectional", originalPrice: "$9,034.00 - $11,410.00", price:"$8,775.50 - $8,657.50", img:"./images/new/2.png"},
-    {name:"New Canaan Low Bookshelf", originalPrice: "$5,295.00 - $5,495.00", price:"$3,971.25 - $4,121.25", img:"./images/new/3.png"},
-    {name:"Eames Wire Chair Low Wire Base", originalPrice: "$1,995.00", price:"$1,496.25", img:"./images/new/4.png"},
-    {name:"Passport Table", originalPrice: "$11,700.00 - $11,540.00", price:"$1,295.00 - $1,795.00", img:"./images/new/2.png"},
-    {name:"Zeph Chair", originalPrice: "$11,700.00 - $11,540.00", price:"$795.00 - $1,095.00", img:"./images/new/3.png"}
+    { name: "Pursuit Rug by Edith Van Berkel", price: "$2,145.00 - $9,295.00", img: "./images/new/1.png" },
+    { name: "Luva Modular Sectional", originalPrice: "$9,034.00 - $11,410.00", price: "$8,775.50 - $8,657.50", discount: "25% off", img: "./images/new/2.png" },
+    { name: "New Canaan Low Bookshelf", originalPrice: "$5,295.00 - $5,495.00", price: "$3,971.25 - $4,121.25", discount: "25% off", img: "./images/new/3.png" },
+    { name: "Eames Wire Chair Low Wire Base", originalPrice: "$1,995.00", price: "$1,496.25", discount: "25% off", img: "./images/new/4.png" },
+    { name: "Passport Table", originalPrice: "$11,700.00 - $11,540.00", price: "$1,295.00 - $1,795.00", discount: "25% off", img: "./images/new/2.png" },
+    { name: "Zeph Chair", originalPrice: "$11,700.00 - $11,540.00", price: "$795.00 - $1,095.00", discount: "25% off", img: "./images/new/3.png" },
+    { name: "Zeph Chair", originalPrice: "$11,700.00 - $11,540.00", price: "$795.00 - $1,095.00", discount: "25% off", img: "./images/new/3.png" },
+    { name: "Zeph Chair", originalPrice: "$11,700.00 - $11,540.00", price: "$795.00 - $1,095.00", discount: "25% off", img: "./images/new/3.png" }
 ];
 
-// 공통 상품 카드 HTML 생성 함수
-function createProductCardHTML(p) {
+function createProductCardHTML(item) {
+    const hasDiscount = Boolean(item.originalPrice);
     return `
         <div class="product-card">
             <div class="product-thumb">
-                <img src="${p.img}" alt="${p.name}" class="product-img">
-                <p class="heart"><img src="./images/icons/wish.png" alt="wish"></p>
+                <img src="${item.img}" alt="${item.name}">
+                <button class="heart" aria-label="Wishlist">
+                    <img src="./images/wish.png" alt="heart">
+                </button>
             </div>
             <div class="product-info">
-                <div class="product-name">${p.name}</div>
+                <p class="product-name">${item.name}</p>
                 <div class="product-price-group">
-                    ${p.originalPrice ? `<div class="product-price-bf">${p.originalPrice}</div>` : ''}
-                    <div class="product-price">${p.price}</div>
-                    ${p.discount ? `<span class="sale-badge">${p.discount}</span>` : ''}
+                    ${hasDiscount ? `<span class="product-price-bf">${item.originalPrice}</span>` : ''}
+                    <div>
+                        <span class="product-price">${item.price}</span>
+                        ${item.discount ? `<span class="sale-badge">${item.discount}</span>` : ''}
+                    </div>
                 </div>
             </div>
         </div>
@@ -205,12 +298,78 @@ function renderMdPick() {
     `).join('');
 }
 
+// ======================== NEW IN SLIDER LOGIC ========================
+
+// 1. 단일화된 상품 카드 HTML 생성 함수 (.product-thumb 및 데이터 연동 discount 적용)
+// New In 영역에서 사용하는 상품 카드 생성 함수
+function createProductCardHTML(item) {
+    return `
+        <div class="product-card">
+            <div class="product-thumb">
+                <img src="${item.img}" alt="${item.name}" class="product-img">
+                <button class="heart" aria-label="Wishlist">
+                    <img src="./images/icons/wish.png" alt="wish">
+                </button>
+            </div>
+            <div class="product-info">
+                <div class="product-name">${item.name}</div>
+                <div class="product-price-group">
+                    ${item.originalPrice ? `<div class="product-price-bf">${item.originalPrice}</div>` : ''}
+                    <div class="product-price">${item.price}</div>
+                    ${item.discount ? `<span class="sale-badge">${item.discount}</span>` : ''}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // 2. New In 렌더링
 function renderNewIn() {
     const container = document.getElementById('newInRow');
     if (!container) return;
     container.innerHTML = newInData.map(createProductCardHTML).join('');
 }
+
+// 3. 슬라이더 및 트랙바 이벤트 설정
+function initNewInSlider() {
+    const newInRow = document.getElementById('newInRow');
+    const newInPrev = document.getElementById('newInPrev');
+    const newInNext = document.getElementById('newInNext');
+    const newInBar = document.getElementById('newInBar');
+
+    if (!newInRow || !newInPrev || !newInNext || !newInBar) return;
+
+    let currentStep = 0; // 0: 1단계 (앞 4개), 1: 2단계 (뒤 4개)
+
+function updateSliderPosition() {
+    // newInRow.clientWidth 만큼 이동하면 정확히 4개 단위로 넘어갑니다.
+    const scrollAmount = newInRow.clientWidth + parseFloat(getComputedStyle(newInRow).gap || 0);
+
+    if (currentStep === 0) {
+        newInRow.scrollTo({ left: 0, behavior: 'smooth' });
+        newInBar.style.width = '50%';
+    } else {
+        newInRow.scrollTo({ left: newInRow.scrollWidth - newInRow.clientWidth, behavior: 'smooth' });
+        newInBar.style.width = '100%';
+    }
+}
+
+    newInNext.addEventListener('click', () => {
+        currentStep = 1;
+        updateSliderPosition();
+    });
+
+    newInPrev.addEventListener('click', () => {
+        currentStep = 0;
+        updateSliderPosition();
+    });
+}
+
+// DOM 로드 완료 시 렌더링 및 이벤트 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    renderNewIn();
+    initNewInSlider();
+});
 
 // 3. Collection (Room Products) 핫스팟 & 카드 렌더링
 function renderCollection() {
