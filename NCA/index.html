@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOTCUTEANYMORE</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./images/icons/star-act.png" type="image/x-icon">
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/index.css">
     <!--swiper 필수 css cdn 연결-->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css"> -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
     <!-- Ticker Banner HTML -->
@@ -60,9 +60,9 @@
         </div>
         <!-- Star Pagination -->
         <div class="star_pagination">
-            <button class="star-btn active" data-index="0" aria-label="1번 배너로 이동"><img src="" alt=""></button>
-            <button class="star-btn" data-index="1" aria-label="2번 배너로 이동"><img src="" alt=""></button>
-            <button class="star-btn" data-index="2" aria-label="3번 배너로 이동"><img src="" alt=""></button>
+            <button class="star-btn active" data-index="0" aria-label="1번 배너로 이동"><img src="./images/icons/star-act.png" alt=""></button>
+            <button class="star-btn" data-index="1" aria-label="2번 배너로 이동"><img src="./images/icons/star.png" alt=""></button>
+            <button class="star-btn" data-index="2" aria-label="3번 배너로 이동"><img src="./images/icons/star.png" alt=""></button>
         </div>
     </div>
     <!-- 베스트 -->
@@ -150,7 +150,7 @@
             <div class="binder_left">
                 <a href="#" class="binder_shop_btn">SHOP NOW</a>
             </div>
-            <div class="binder_divider"><img src="#" alt="divider"></div>
+            <div class="binder_divider"><img src="./images/collection/divider.png" alt="divider"></div>
             <div class="binder_right">
                 <ul class="binder_products">
                     <li>
@@ -195,42 +195,60 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <img src="./images/lookbook/1.png" alt="look1">
-                        <button class="hotspot"><img src="#" alt="+"></button>
+                        <button class="hotspot"><img src="./images/icons/hotspot.png" alt="+"></button>
                         <span>01</span>
                     </div>
                     <div class="swiper-slide">
                         <img src="./images/lookbook/2.png" alt="look2">
                         <!-- hotspot -->
-                        <button class="hotspot"><img src="#" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
                         <span>02</span>
                     </div>
                     <div class="swiper-slide">
                         <img src="./images/lookbook/3.png" alt="look3">
                         <!-- hotspot -->
-                        <button class="hotspot"><img src="#" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
                         <span>03</span>
                     </div>
                     <div class="swiper-slide">
-                        <img src="./images/lookbook/4.png" alt="look3">
+                        <img src="./images/lookbook/4.png" alt="look4">
                         <!-- hotspot -->
-                        <button class="hotspot"><img src="#" alt="+"></button>
-                        <span>03</span>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <span>04</span>
                     </div>
                     <div class="swiper-slide">
-                        <img src="./images/lookbook/4.png" alt="look3">
+                        <img src="./images/lookbook/5.png" alt="look5">
                         <!-- hotspot -->
-                        <button class="hotspot"><img src="#" alt="+"></button>
-                        <span>03</span>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <span>05</span>
                     </div>
                     <div class="swiper-slide">
-                        <img src="./images/lookbook/4.png" alt="look3">
+                        <img src="./images/lookbook/6.png" alt="look6">
                         <!-- hotspot -->
-                        <button class="hotspot"><img src="#" alt="+"></button>
-                        <span>03</span>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <span>06</span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./images/lookbook/7.png" alt="look7">
+                        <!-- hotspot -->
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <span>07</span>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./images/lookbook/8.png" alt="look8">
+                        <!-- hotspot -->
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <button class="hotspot"><img src="/images/icons/hotspot.png" alt="+"></button>
+                        <span>08</span>
                     </div>
                 </div>
-                <div class="swiper-btn-prev"></div>
-                <div class="swiper-btn-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
             <p class="lookbook_desc">Being cute doesn't define who I am.<br>There's a lot more to me than that.</p>
         </div>
@@ -261,23 +279,22 @@
     <!-- get the look Popup -->
     <div class="popup_overlay">
         <div class="popup_box">
-            <button class="popup_close" aria-label="팝업 닫기">X</button>
+            <button class="popup_close" aria-label="팝업 닫기"><img src="" alt=""></button>
             <div class="popup_left">
-                <img src="" alt="">
                 <span class="popup_handle">@minnnit</span>
             </div>
             <div class="popup_right">
                 <div class="popup_product">
-                <img src="" alt="">
-                <p class="popup_name">Noir pleated skirt</p>
-                <p class="popup_price">₩58,000</p>
-                <a href="#" class="popup_shop_btn">SHOP NOW</a>
+                    <img src="./" alt="">
+                    <p class="popup_name">Noir pleated skirt</p>
+                    <p class="popup_price">₩58,000</p>
+                    <a href="#" class="popup_shop_btn">SHOP NOW</a>
                 </div>
                 <div class="popup_product">
-                <img src="" alt="">
-                <p class="popup_name">Noir pleated skirt</p>
-                <p class="popup_price">₩58,000</p>
-                <a href="#" class="popup_shop_btn">SHOP NOW</a>
+                    <img src="" alt="">
+                    <p class="popup_name">Noir pleated skirt</p>
+                    <p class="popup_price">₩58,000</p>
+                    <a href="#" class="popup_shop_btn">SHOP NOW</a>
                 </div>
             </div>
         </div>
@@ -288,23 +305,23 @@
                 <!-- ABOUT -->
                 <dl class="footer-menu-group">
                     <dt>NOTCUTEANYMORE</dt>
-                    <dd><a href="#">OUR STORY</a></dd>
-                    <dd><a href="#">LOOKBOOK</a></dd>
-                    <dd><a href="#">STOCKISTS</a></dd>
+                    <dd><a href="#OUR STORY">OUR STORY</a></dd>
+                    <dd><a href="#LOOKBOOK">LOOKBOOK</a></dd>
+                    <dd><a href="#STOCKISTS">STOCKISTS</a></dd>
                 </dl>
                 <!-- SUPPORT -->
                 <dl class="footer-menu-group">
                     <dt>SUPPORT</dt>
-                    <dd><a href="#">FAQ</a></dd>
-                    <dd><a href="#">SHIPPING</a></dd>
-                    <dd><a href="#">CONTACT</a></dd>
+                    <dd><a href="#FAQ">FAQ</a></dd>
+                    <dd><a href="#SHIPPING">SHIPPING</a></dd>
+                    <dd><a href="#CONTACT">CONTACT</a></dd>
                 </dl>
                 <!-- SOCIALS -->
                 <div class="footer-menu-group socials">
                     <p class="social_title">SOCIALS</p>
                     <div class="social_icons">
-                        <a href="#"><img src="./images/insta.png" alt="insta"></a>
-                        <a href="#"><img src="./images/pinterest.png" alt="pinterest"></a>
+                        <a href="#instagram"><img src="./images/icons/insta.png" alt="insta"></a>
+                        <a href="#pinterest"><img src="./images/icons/pinterest.png" alt="pinterest"></a>
                     </div>
                 </div>
             </div>
@@ -329,7 +346,7 @@
             </div>
         </div>
     </footer>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>

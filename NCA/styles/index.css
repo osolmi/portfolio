@@ -6,9 +6,14 @@
     
     --nca-padding-tb:6.25rem;
     --nca-padding-lr:3.125rem;
+
+    --nca-fsize-xs:0.75rem;
+    --nca-fsize-s:0.875rem;
+    --nca-fsize-m:1rem;
+    --nca-fsize-l:1.5rem;
 }
 
-h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point); /* padding-left:var(--nca-padding-lr); */}
+h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point); margin-bottom: 1.25rem;}
 /* 띠배너 */
 .ticker-banner{
     height: 2rem;
@@ -22,7 +27,7 @@ h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point); /* padding-left:
 .ticker-item{
     padding:10px 80px;
     color:var(--nca-dark);
-    font-size:12px; font-weight: 600;
+    font-size:11px; font-weight: 550;
     white-space:nowrap;
 }
 @keyframes ticker{
@@ -32,32 +37,45 @@ h2 {font-size: 5rem; font-weight: 700; color: var(--nca-point); /* padding-left:
 
 /* ========================== 내비 */
 header{
-    position:fixed;left:0; right:0;
+    position:fixed;
+    left:0; right:0; top: 0;
     height:6.375rem;
     z-index:100;
     display: flex; flex-direction: column;
-    background:rgba(255,255,255,0.15);   /* 반투명 — 뒤 배경(히어로 이미지)이 비침 */
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
+    background:transparent;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+/* 히어로 배너를 통과했을 때 작용하는 스크롤 헤더 스타일 */
+header.is-scrolled {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-bottom: 1px solid rgba(168, 216, 204, 0.2);
 }
 .gnb{
     position:relative;
-    height:4.375rem; flex-shrink: 0;
+    height:4rem; flex-shrink: 0;
     display:flex; align-items:center; justify-content:space-between;
-    padding:0 50px;
+    padding:0 var(--nca-padding-lr);
 }
 .nav_left, .nav_right{
     display:flex; align-items:center; gap:1.875rem;
 }
-.gnb *{
-    font-size: 0.875rem; font-weight:500;
+.gnb a, .gnb li {
+    font-size: var(--nca-fsize-s); 
+    font-weight: 500;
     color: var(--nca-white);
+    transition: color 0.3s ease;
+}
+header.is-scrolled .gnb a,
+header.is-scrolled .gnb li {
+    color: var(--nca-point);
 }
 .gnb h1{
     position:absolute; left:50%; top:50%;
     transform:translate(-50%, -50%);
 }
-.gnb h1 img{ width:8.75rem; }
+.gnb h1 img{ width:7.75rem; display: block;}
 
 /* =========================== 히어로 배너 슬라이드 */
 .hero_section{ position:relative; height:100vh; overflow:hidden; }
@@ -67,7 +85,7 @@ header{
 
 .hero_fixed{
     position:absolute; inset:0;
-    z-index:99; /* swiper보다 위 레이어 */
+    z-index:90;
     display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap: 1rem;
     color:#fff;
     pointer-events:none; /* 슬라이드 스와이프 방해 안 하게, 버튼만 아래서 다시 켜줌 */
@@ -81,21 +99,50 @@ header{
     border:1px solid var(--nca-white); color:var(--nca-white);
 }
 
+/* 별 모양 커스텀 도트 내비 */
+.star_pagination {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 95;
+    display: flex;
+    gap: 1rem;
+}
+.star-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.star-btn.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+.star-btn img { width: 100%; height: auto; object-fit: contain; }
+
 /* ========================== 베스트 슬라이드 */
 .best{ padding:var(--nca-padding-tb) var(--nca-padding-lr);}
+.best {padding-top: 8.125rem;}
 .best .best-swiper {
     width: 100%;
+    position: relative;
 }
 .best-swiper .swiper-slide{
     /* aspect-ratio:3/4; */
     flex: 1;
 }
 .best-swiper .swiper-slide a {
-    display: flex; flex-direction: column;
-    padding-top:4.688rem;
+    display: flex; 
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 20%;
 }
-.best-swiper .swiper-slide a img {}
-.best-swiper .swiper-slide a span {color: var(--nca-dark); font-size: 0.875rem;}
+.best-swiper .swiper-slide a img {width: 100%; object-fit: cover;}
+.best-swiper .swiper-slide a span {color: var(--nca-dark); font-size: var(--nca-fsize-s);}
 
 /* ========================== 어바웃 */
 .about {display: flex; height: 45.2rem; padding: var(--nca-padding-);}
@@ -107,7 +154,7 @@ header{
 }
 .about_left .about_top{
     color: var(--nca-point);
-    font-size: 1.5rem; font-weight: 600; line-height: 1.4;
+    font-size: var(--nca-fsize-l); font-weight: 600; line-height: 1.4;
 }
 .about_left .about_btm{
     display: flex; flex-direction: column;
@@ -118,24 +165,158 @@ header{
     font-size: 0.875rem; line-height: 1.4;
 }
 
+/* ========================== NEW COLLECTION (바인더) */
+.new_collection { 
+    padding: var(--nca-padding-tb) var(--nca-padding-lr); 
+}
+.binder_wrap {
+    display: flex;
+    position: relative;
+    background: #fff;
+    min-height: 500px;
+}
+.binder_left {
+    flex: 1;
+    background-image: url(../images/collection/1.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    align-items: flex-end;
+}
+.binder_shop_btn {
+    padding: 10px 24px;
+    border: 1px solid var(--nca-dark);
+    color: var(--nca-dark);
+    font-size: 0.875rem;
+    background: rgba(255, 255, 255, 0.8);
+}
+.binder_divider {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+.binder_divider img { height: 102%; width: auto; }
+
+.binder_right {
+    background-image: url(../images/collection/2.jpg);
+    background-size: cover;
+    background-position: left;
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+}
+.binder_products {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.binder_products li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+.binder_products li img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+}
+.binder_products li span { font-size: 0.875rem; color: var(--nca-dark); }
+
 /* ========================== 룩북 */
-.lookbook{ display:flex; padding: var(--nca-padding);}
-.lookbook_left {flex: 1}
-.lookbook_left img {width: 100%; height: auto; display: block; object-fit: cover;}
-.lookbook_right {flex: 1; display: flex; flex-flow: column; align-items: center; text-align: center;}
+.lookbook{
+    display:flex; align-items: flex-start;
+    padding: var(--nca-padding-tb) 0;
+    gap: 1.875rem;
+    width: 100%;
+}
+.lookbook_left {flex: 0.78; min-width: 0;}
+.lookbook_left img {width: 100%; aspect-ratio: 780 / 1040; display: block; object-fit: cover;}
+.lookbook_right {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: var(--nca-padding-lr) 0;
+}
 .lookbook-swiper {
     width: 100%;
     padding: 1.25rem 0;
     position: relative;
 }
-.lookbook-swiper .swiper-slide{ position:relative; }
+.lookbook-swiper .swiper-slide{
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* ✨ 슬라이드 번호 오른쪽 정렬 */
+.lookbook-swiper .swiper-slide span {
+    width: 100%;
+    max-width: 360px;
+    text-align: right;
+    font-size: var(--nca-fsize-s);
+    color: var(--nca-dark);
+    display: block;
+}
+.lookbook-swiper .swiper-slide img {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 360 / 589;
+    object-fit: cover;
+    display: block;
+}
 .lookbook-swiper .hotspot{
-    position:absolute; top:16px; right:16px;
-    width:28px; height:28px; border-radius:50%;
-    background:#fff; font-size:12px;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; pointer-events:none;
-    transition:opacity .25s ease;
+position: absolute; 
+    top: 45%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem; height: 1rem;
+    border: none;
+    background: transparent;
+    padding: 0;
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    z-index: 10; /* 이미지 위로 올라오도록 설정 */
+}
+/* 핫스팟 (가운데 활성화 슬라이드에만 표시) */
+.lookbook-swiper .hotspot {
+    position: absolute; 
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px; height: 32px;
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+.lookbook-swiper .hotspot img {width: 100%; height: 100%;}
+.lookbook-swiper .swiper-slide-active .hotspot:hover {
+    transform: translate(-50%, -50%) scale(1.1); /* 호버 효과 */
+}
+.lookbook_desc {
+    margin-top: 6rem;
+    text-align: center;
+    color: var(--nca-point);
+    font-size: 0.875rem; font-weight: 600;
+    line-height: 1.2;
+    text-transform: uppercase;
 }
 /* Swiper가 활성 슬라이드에 자동으로 붙여주는 클래스 */
 .lookbook-swiper .swiper-slide-active .hotspot{
@@ -168,7 +349,7 @@ header{
     top: 0.625rem;
     right: 0.625rem;
     width: 1.25rem; height: 1.25rem;
-    background-image: url(../images/insta_white.png);
+    background-image: url(../images/icons/insta_white.png);
     background-size: contain;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
@@ -185,7 +366,7 @@ header{
     display:flex; align-items:center; justify-content:center;
     opacity:0; visibility:hidden;
     transition:opacity .25s ease;
-    z-index:100;
+    z-index:2000;
 }
 .popup_overlay.is-active{ opacity:1; visibility:visible; }
 
@@ -193,20 +374,46 @@ header{
     position:relative;
     display:flex;
     background:#fff;
-    max-width:900px; width:90%;
+    max-width:73.75rem; width:90%;
+    height: 34.5rem; padding: 1.25rem;
 }
 .popup_close{
-    position:absolute; top:12px; right:12px;
+    position:absolute; top:1.25rem; right:1.25rem;
     font-size:24px; line-height:1;
 }
-.popup_left{ flex:1; }
+.popup_left {
+    /* flex: 1; */
+    aspect-ratio: 384 / 512;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 400px;
+}
 .popup_left img{ width:100%; height:100%; object-fit:cover; }
-.popup_left .popup_handle{ display:block; padding:8px; }
-
-.popup_right{ flex:1; display:flex; flex-direction:column; padding:40px; gap:24px; }
-.popup_product img{ width:100%; aspect-ratio:3/4; background:#eee; margin-bottom:8px; }
+.popup_left .popup_handle{
+    position: absolute;
+    bottom: 0.625rem;
+    left: 0.625rem;
+    color: var(--nca-white);
+    font-size: 0.875rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.popup_left::after{
+    content: '';
+    position: absolute;
+    top: 0.625rem;
+    right: 0.625rem;
+    width: 1.25rem; height: 1.25rem;
+    background-image: url(../images/icons/insta_white.png);
+    background-size: contain;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+.popup_right{ flex:1; display:flex; gap:1.875rem; }
+.popup_product {flex: 1; height: 100%;}
+.popup_product img{ width:100%; background:#eee; margin-bottom:8px; }
 .popup_shop_btn{
-    display:block; margin-top:8px; padding:10px; text-align:center;
+    display:block; margin-top:8px; padding:10px; text-align:center; width: 100%;
     border:1px solid #000;
 }
 
