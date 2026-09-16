@@ -12,15 +12,42 @@
 <body>
     <style>
         /* Chrome, Safari, Opera, Edge */
-html::-webkit-scrollbar,
+/* html::-webkit-scrollbar,
 body::-webkit-scrollbar {
     display: none;
-}
+} */
 
 /* Firefox 및 표준 */
-html, body {
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none;    /* Firefox */
+/* html, body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+} */
+/* ==========================================
+   기본 브라우저 스크롤바 (얇은 알약 모양)
+   ========================================== */
+
+/* 1. 웹킷 브라우저 (Chrome, Safari, Edge, Opera) */
+/* 전체 스크롤바 너비/높이 */
+/* ==========================================
+    웹킷 브라우저 (Chrome, Safari, Edge)
+    ::pseudo-element 방식을 우선 인식합니다.
+   ========================================== */
+::-webkit-scrollbar {
+    width: 5px;   /* 세로 스크롤바 두께 */
+    height: 5px;  /* 가로 스크롤바 두께 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 트랙 배경색 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark); /* 원하시는 손잡이 색상으로 변경 가능 */
+    border-radius: 10px; /* 둥근 알약 모양 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--point);
 }
     </style>
     <!-- ============ HEADER ============ -->
@@ -122,16 +149,24 @@ html, body {
 <!-- ============ MD'S PICK ============ -->
 <section class="wrap mdpick-wrap">
     <div class="mdpick-grid">
-        <!-- 대표 상품 BIG -->
-        <div class="mdpick-feature product-card">
-            <h2 class="title">MD's Pick</h2>
+        <!-- 좌측 BIG 영역 -->
+        <div class="mdpick-feature">
+            <!-- 1. 상단 타이틀 (우측 1행 카드 윗선 정렬) -->
+            <h2 class="title">MD's pick</h2>
+            
+            <!-- 2. 중앙 이미지 (자연스럽게 중앙 배치) -->
             <div class="product-thumb">
                 <img src="./images/md/big.png" alt="Eames Aluminum Group Lounge Chair">
             </div>
-            <div class="product-name">Eames Aluminum Group Lounge Chair</div>
-            <div class="product-price-bf">$695.00 - $890.00</div>
-            <div class="product-price">$521.25 - $667.50</div>
-            <div class="sale-badge">25% off</div>
+            
+            <!-- 우측 product-card와 완전히 동일한 구조로 -->
+            <div class="product-card-info">
+                <!-- <p class="heart-btn-wrap"><button class="heart-btn" aria-label="wishlist"><img src="./images/icons/heart.png" alt=""></button></p> -->
+                <div class="product-name">EAMES ALUMINUM GROUP LOUNGE CHAIR</div>
+                <div class="product-price-bf">$695.00 - $890.00</div>
+                <div class="product-price">$521.25 - $667.50</div>
+                <div class="sale-badge">25% off</div>
+            </div>
         </div>
         <!-- 우측 상품 리스트 -->
         <div class="mdpick-list" id="mdPickList"></div>
@@ -142,7 +177,7 @@ html, body {
     <h2 class="title">Collection</h2>
     <div class="collection-container">
         <!-- 메인 인테리어 이미지 및 핫스팟 영역 -->
-        <div class="main-image-wrap">
+        <div class="main-image-wrap" id="hotspotArea">
             <button type="button" class="hotspot" data-id="1" style="top: 58%; left: 14%;">1</button>
             <button type="button" class="hotspot" data-id="2" style="top: 43%; left: 26%;">2</button>
             <button type="button" class="hotspot" data-id="3" style="top: 29%; left: 37%;">3</button>
@@ -153,16 +188,16 @@ html, body {
         <!-- 우측 상세 정보 카드 -->
         <div class="collection-card">
             <!-- [상단 영역] 사진 + 양옆 화살표 + 좌측하단 큰 번호 -->
-            <div class="card-top">
-                <button type="button" class="nav-btn prev-btn" aria-label="이전"><img src="" alt=""></button>
+            <a class="card-top" href="#info">
+                <button type="button" class="nav-btn prev-btn" aria-label="prev"><img src="./images/icons/left.png" alt="prev"></button>
                 <p class="card-image">
-                    <img src="" alt="Eames Molded Plywood">
+                    <img src="./images/collection/chair.png" alt="Eames Molded Plywood">
                 </p>
-                <button type="button" class="nav-btn next-btn" aria-label="다음"><img src="" alt=""></button>
+                <button type="button" class="nav-btn next-btn" aria-label="next"><img src="./images/icons/right.png" alt="next"></button>
                 
                 <!-- 이미지 좌측 하단에 들어가는 포인트 번호 -->
                 <span id="card-num" class="product-num">05</span>
-            </div>
+            </a>
             <!-- [하단 영역] 제품명 + 표 -->
             <div class="card-bottom">
                 <h3 id="card-name" class="product-name">EAMES MOLDED PLYWOOD</h3>
@@ -213,7 +248,36 @@ html, body {
     </div>
 </section>
 <!-- ============ CATEGORY ============ -->
+<section class="wrap category-wrap">
+    <div class="category-grid">
+        <!-- 윗줄 3개 (2열, 3열, 5열 위치에 배치) -->
+        <a href="#" class="category-item item-living">
+            <img src="./images/category/living.jpg" alt="Living Room">
+            <span class="category-name">Living Room</span>
+        </a>
+        <a href="#" class="category-item item-dining">
+            <img src="./images/category/dining.jpg" alt="Dining">
+            <span class="category-name">Dining</span>
+        </a>
+        <a href="#" class="category-item item-office">
+            <img src="./images/category/office.jpg" alt="Office">
+            <span class="category-name">Office</span>
+        </a>
 
+        <!-- 아랫줄 타이틀 (1열 / 2행에 위치해 수평 유지) -->
+        <h2 class="title">Category</h2>
+
+        <!-- 아랫줄 2개 (3열, 4열 위치에 배치) -->
+        <a href="#" class="category-item item-decor">
+            <img src="./images/category/decor.jpg" alt="Decor">
+            <span class="category-name">Decor</span>
+        </a>
+        <a href="#" class="category-item item-lighting">
+            <img src="./images/category/lighting.jpg" alt="Lighting">
+            <span class="category-name">Lighting</span>
+        </a>
+    </div>
+</section>
 <!-- ============ DESIGNER + HERITAGE ============ -->
 <section class="heritage-section-wrap">
     <!-- POPULAR DESIGNERS -->
@@ -327,6 +391,13 @@ html, body {
                 <input type="email" placeholder="yourname@example.com">
                 <button type="submit">Sign Up</button>
                 </form>
+                <div class="footer-social">
+                    <a href="#"><img src="./images/icons/insta.png" alt=""></a>
+                    <a href="#"><img src="./images/icons/facebook.png" alt=""></a>
+                    <a href="#"><img src="./images/icons/pinterest.png" alt=""></a>
+                    <a href="#"><img src="./images/icons/youtube.png" alt=""></a>
+                    <a href="#"><img src="./images/icons/twitter.png" alt=""></a>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>Shop</h4>
@@ -356,16 +427,13 @@ html, body {
                 </ul>
             </div>
         </div>
-        <div class="footer-social">
-            <a href="#"><img src="" alt=""></a>
-            <a href="#"><img src="" alt=""></a>
-            <a href="#"><img src="" alt=""></a>
-        </div>
         <div class="footer-bottom">
-        <span>© 2026 Herman Miller — Redesign Concept</span>
-        <span>Privacy Notice&nbsp;&nbsp;&nbsp;Terms of Sale&nbsp;&nbsp;&nbsp;Cookie Settings</span>
+            <div class="footer-logo"><img src="./images/logo_footer.png" alt="logo"></div>
+            <span>© 2026 Herman Miller — Redesign Concept</span>
+            <span>Privacy Notice</span>
+            <span>Terms of Sale</span>
+            <span>Cookie Settings</span>
         </div>
-        <div class="footer-logo"><img src="./images/logo_footer.png" alt="logo"></div>
     </div>
 </footer>
 </body>

@@ -3,7 +3,7 @@ const navData = {
     living:   { sub:["View All","Living Room","Lounge Chairs & Ottomans","Sofas & Sectionals","Coffee & Side Tables","Benches & Stools","Side Chairs","Living Room Storage","Shelving & Storage"], caption:"Relax in the Eames Lounge Chair and Ottoman", img:"./images/nav/living.jpg" },
     dining:   { sub:["View All","Dining Tables","Dining Chairs & Stools","Buffets, Sideboards & Credenzas"], caption:"Set the table with Eames Dining Chairs", img:"./images/nav/dining.jpg" },
     lighting: { sub:["View All","Ceiling Lights & Pendants","Desk & Table Lamps","Floor Lamps","Wall Lights & Sconces"], caption:"Shop Nelson Bubble Lamps", img:"./images/nav/lighting.jpg" },
-    eames:    { sub:["View All","Lounge Chairs & Ottomans","Dining Chairs","Molded Plywood Collection","Storage & Shelving"], caption:"65 Years of the Eames Lounge Chair" },
+    eames:    { sub:["View All","Lounge Chairs & Ottomans","Dining Chairs","Molded Plywood Collection","Storage & Shelving"], caption:"65 Years of the Eames Lounge Chair", img:"./images/nav/eames.jpg"},
     office:   { sub:["View All","Office Chairs","Aeron Chair","Standing Desks","Home Office Storage","Gaming Chairs & Desks"], caption:"Try Our Office Chair Quiz", img:"./images/nav/office.jpg" },
     gaming:   { sub:["Gaming Chairs","Gaming Desks","Gaming Accessories","Gaming Sale: Up to 25% Off","Logitech G"], caption:"Find your ideal gaming chair with our quiz", img:"./images/nav/gaming.jpg" },
     decor:    { sub:["View All","Wall Decor & Art","Rugs","Decorative Objects","Pillows & Throws","Clocks"], caption:"Shop Eames Hang-It-All", img:"./images/nav/decor.jpg" },
@@ -25,6 +25,7 @@ function moveNavCatDot(li){
     if(!navCatDot || !li) return;
     navCatDot.style.top = (li.offsetTop + li.offsetHeight/2 - 3) + 'px';
     }
+
 
 /* ================= 하위메뉴 렌더링 ================= */
 function renderNavSub(key){
@@ -121,22 +122,22 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ================= Bestsellers DATA ================= */
 const bestsellerData = {
     office:  [
-        {name:"Aeron Chair", originalPrice: "$2,895.00 - $3,195.00", price:"$1,555.00 - $2,745.00", discount: "25% off", img:"./images/bs/1.png"},
-        {name:"Embody Chair", price:"$1,895.00 - $2,145.00"},
-        {name:"Sayl Chair", price:"$495.00 - $695.00"},
-        {name:"Cosm Chair", price:"$1,095.00 - $1,395.00"}
+        {name:"Aeron Chair", price:"$1,555.00 - $2,745.00", img:"./images/bs/office_1.png"},
+        {name:"Embody Chair", price:"$$2,090.00 - $2,565.00", img:"./images/bs/office_2.png"},
+        {name:"Sayl Chair", price:"$$885.00 - $1,530.00", img:"./images/bs/office_3.png"},
+        {name:"Cosm Chair", price:"$$1,585.00 - $2,060.00", img:"./images/bs/office_4.png"}
     ],
     lounge:  [
         {name:"Eames Lounge Chair and Ottoman", price:"$6,745.00 - $8,996.25"},
         {name:"Eames Molded Plywood Lounge Chair", price:"$1,421.25 - $1,795.00"},
-        {name:"Wireless Lounge Chair", price:"$995.00 - $1,325.00"},
+        {name:"Eames Lounge Chair", price:"$995.00 - $1,325.00"},
         {name:"Eames Aluminum Group Lounge Chair", price:"$521.25 - $667.50"}
     ],
     coffee:  [
-        {name:"Noguchi Table", originalPrice: "$2,895.00 - $3,195.00", price:"$2,171.25 - $2,396.25", discount: "25% off", img:"./images/bs/1.png"},
-        {name:"Eames Wire Base Low Table", originalPrice: "$275.00 - $325.00", price:"$206.25 - $243.75", discount: "25% off", img:"./images/bs/2.png"},
-        {name:"Eames Molded Plywood Coffee Table", originalPrice: "$1,430.00 - $1,530.00", price:"$1,072.50 - $1,147.50", discount: "25% off", img:"./images/bs/3.png"},
-        {name:"Eames Elliptical Table", originalPrice: "$1,435.00 - $2,830.00", price:"$1,076.25 - $2,122.50", discount: "25% off", img:"./images/bs/4.png"}
+        {name:"Noguchi Table", originalPrice: "$2,895.00 - $3,195.00", price:"$2,171.25 - $2,396.25", discount: "25% off", img:"./images/bs/coffee_1.png"},
+        {name:"Eames Wire Base Low Table", originalPrice: "$275.00 - $325.00", price:"$206.25 - $243.75", discount: "25% off", img:"./images/bs/coffee_2.png"},
+        {name:"Eames Molded Plywood Coffee Table", originalPrice: "$1,430.00 - $1,530.00", price:"$1,072.50 - $1,147.50", discount: "25% off", img:"./images/bs/coffee_3.png"},
+        {name:"Eames Elliptical Table", originalPrice: "$1,435.00 - $2,830.00", price:"$1,076.25 - $2,122.50", discount: "25% off", img:"./images/bs/coffee_4.png"}
     ],
     dining:  [
         {name:"Eames Molded Plywood Dining Chair", price:"$521.25 - $667.50"},
@@ -235,9 +236,9 @@ const roomProducts = [
     {num:"02", name:"Noguchi Table", material:"Glass, walnut", year:"1948", designer:"Isamu Noguchi", price:"$2,171.25", x:42, y:70},
     {num:"03", name:"Nelson Bubble Lamp", material:"Steel, styrene shade", year:"1947", designer:"George Nelson", price:"$465.00", x:32, y:35},
     {num:"04", name:"Framed Wall Print", material:"Paper, wood frame", year:"—", designer:"—", price:"$120.00", x:60, y:30},
-    {num:"05", name:"Eames Molded Plywood Lounge Chair", material:"Walnut veneer, molded plywood", year:"1946", designer:"Charles & Ray Eames", price:"$1,895.00", img: "./images/collecion/chair.png", x:74, y:52}
+    {num:"05", name:"Eames Molded Plywood Lounge Chair", material:"Walnut veneer, molded plywood", year:"1946", designer:"Charles & Ray Eames", price:"$1,895.00", img: "./images/collection/chair.png", x:74, y:52}
 ];
-
+let currentCollectionIndex = 0; // 현재 선택된 상품 인덱스 저장
 // ======================== New In 데이터 ========================
 const newInData = [
     { name: "Pursuit Rug by Edith Van Berkel", price: "$2,145.00 - $9,295.00", img: "./images/new/1.png" },
@@ -373,16 +374,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 3. Collection (Room Products) 핫스팟 & 카드 렌더링
 function renderCollection() {
-    const hotspotArea = document.getElementById('hotspotArea');
+    const hotspotArea = document.getElementById('hotspotArea') || document.querySelector('.main-image-wrap');
     if (!hotspotArea) return;
 
-    // 핫스팟 생성
+    // 핫스팟 동적 생성
     hotspotArea.innerHTML = roomProducts.map((p, i) => `
         <button type="button" 
                 class="hotspot ${i === 0 ? 'active' : ''}" 
                 data-index="${i}"
                 style="left:${p.x}%; top:${p.y}%;">
-            ${p.num}
+            ${i + 1}
         </button>
     `).join('');
 
@@ -394,12 +395,29 @@ function renderCollection() {
         const btn = e.target.closest('.hotspot');
         if (!btn) return;
         
-        document.querySelectorAll('.hotspot').forEach(h => h.classList.remove('active'));
-        btn.classList.add('active');
-        
         const idx = parseInt(btn.dataset.index, 10);
         updateCollectionCard(idx);
     });
+
+    // 카드 좌우 화살표 버튼 이벤트 연동
+    const prevBtn = document.querySelector('.collection-card .prev-btn');
+    const nextBtn = document.querySelector('.collection-card .next-btn');
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const prevIdx = (currentCollectionIndex - 1 + roomProducts.length) % roomProducts.length;
+            updateCollectionCard(prevIdx);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const nextIdx = (currentCollectionIndex + 1) % roomProducts.length;
+            updateCollectionCard(nextIdx);
+        });
+    }
 }
 
 // Collection 우측 카드 정보 갱신
@@ -407,18 +425,37 @@ function updateCollectionCard(index) {
     const item = roomProducts[index];
     if (!item) return;
 
+    currentCollectionIndex = index; // 현재 인덱스 업데이트
+
+    // 핫스팟 active 클래스 교체
+    document.querySelectorAll('.hotspot').forEach((h, i) => {
+        h.classList.toggle('active', i === index);
+    });
+
+    // 텍스트 정보 업데이트
     document.getElementById('card-num').textContent = item.num;
     document.getElementById('card-name').textContent = item.name;
     document.getElementById('card-material').textContent = item.material;
     document.getElementById('card-year').textContent = item.year;
     document.getElementById('card-designer').textContent = item.designer;
-    document.getElementById('card-price').textContent = item.price;
-    document.getElementById('card-img').src = item.img;
+    
+    // 가격 태그 (내부 span 보존)
+    const priceEl = document.getElementById('card-price');
+    if (priceEl) {
+        priceEl.innerHTML = `<span class="sale-price">${item.price}</span>`;
+    }
+
+    // 이미지 태그 업데이트 (HTML의 .card-image img 선택)
+    const cardImg = document.querySelector('.card-image img');
+    if (cardImg && item.img) {
+        cardImg.src = item.img;
+        cardImg.alt = item.name;
+    }
 }
 
-// DOM 로드 완료 시 전체 실행
+// DOM 로드 완료 시 실행
 document.addEventListener('DOMContentLoaded', () => {
-    renderMdPick();
-    renderNewIn();
+    if (typeof renderMdPick === 'function') renderMdPick();
+    if (typeof renderNewIn === 'function') renderNewIn();
     renderCollection();
 });
