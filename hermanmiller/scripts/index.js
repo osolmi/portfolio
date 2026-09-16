@@ -119,6 +119,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setSlide(0);
 
+// ================= WISHLIST TOGGLE (하트 아이콘 껐다 켰다) =================
+document.addEventListener('click', (e) => {
+    // .heart 또는 .heart-btn 요소를 클릭했는지 확인
+    const heartBtn = e.target.closest('.heart, .heart-btn');
+    if (!heartBtn) return;
+
+    e.preventDefault(); // 기본 동작 방지
+
+    const img = heartBtn.querySelector('img');
+    if (!img) return;
+
+    // active 클래스 토글
+    const isActive = heartBtn.classList.toggle('active');
+
+    if (isActive) {
+        // [ON] 채워진 빨간 하트 이미지
+        img.src = './images/icons/wish-full.png';
+        img.alt = 'wishlist active';
+    } else {
+        // [OFF] 빈 하트 이미지
+        img.src = './images/icons/wish.png';
+        img.alt = 'wishlist';
+    }
+});
 /* ================= Bestsellers DATA ================= */
 const bestsellerData = {
     office:  [
@@ -232,8 +256,8 @@ const mdPickData = [
 
 //======================== Collection
 const roomProducts = [
-    {num:"01", name:"Eames Lounge Chair and Ottoman", material:"Walnut veneer, leather", year:"1956", designer:"Charles & Ray Eames", price:"$6,745.00", x:22, y:60},
-    {num:"02", name:"Noguchi Table", material:"Glass, walnut", year:"1948", designer:"Isamu Noguchi", price:"$2,171.25", x:42, y:70},
+    {num:"01", name:"Eames Lounge Chair and Ottoman", material:"Walnut veneer, leather", year:"1956", designer:"Charles & Ray Eames", price:"$6,745.00", x:18, y:65},
+    {num:"02", name:"Noguchi Table", material:"Glass, walnut", year:"1948", designer:"Isamu Noguchi", price:"$2,171.25", x:30, y:70},
     {num:"03", name:"Nelson Bubble Lamp", material:"Steel, styrene shade", year:"1947", designer:"George Nelson", price:"$465.00", x:32, y:35},
     {num:"04", name:"Framed Wall Print", material:"Paper, wood frame", year:"—", designer:"—", price:"$120.00", x:60, y:30},
     {num:"05", name:"Eames Molded Plywood Lounge Chair", material:"Walnut veneer, molded plywood", year:"1946", designer:"Charles & Ray Eames", price:"$1,895.00", img: "./images/collection/chair.png", x:74, y:52}

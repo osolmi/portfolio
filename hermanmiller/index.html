@@ -11,27 +11,6 @@
 </head>
 <body>
     <style>
-        /* Chrome, Safari, Opera, Edge */
-/* html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-    display: none;
-} */
-
-/* Firefox 및 표준 */
-/* html, body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-} */
-/* ==========================================
-   기본 브라우저 스크롤바 (얇은 알약 모양)
-   ========================================== */
-
-/* 1. 웹킷 브라우저 (Chrome, Safari, Edge, Opera) */
-/* 전체 스크롤바 너비/높이 */
-/* ==========================================
-    웹킷 브라우저 (Chrome, Safari, Edge)
-    ::pseudo-element 방식을 우선 인식합니다.
-   ========================================== */
 ::-webkit-scrollbar {
     width: 5px;   /* 세로 스크롤바 두께 */
     height: 5px;  /* 가로 스크롤바 두께 */
@@ -178,11 +157,11 @@ body::-webkit-scrollbar {
     <div class="collection-container">
         <!-- 메인 인테리어 이미지 및 핫스팟 영역 -->
         <div class="main-image-wrap" id="hotspotArea">
-            <button type="button" class="hotspot" data-id="1" style="top: 58%; left: 14%;">1</button>
-            <button type="button" class="hotspot" data-id="2" style="top: 43%; left: 26%;">2</button>
-            <button type="button" class="hotspot" data-id="3" style="top: 29%; left: 37%;">3</button>
-            <button type="button" class="hotspot" data-id="4" style="top: 64%; left: 45%;">4</button>
-            <button type="button" class="hotspot active" data-id="5" style="top: 49%; left: 61%;">5</button>
+            <button type="button" class="hotspot" data-id="1">1</button>
+            <button type="button" class="hotspot" data-id="2">2</button>
+            <button type="button" class="hotspot" data-id="3">3</button>
+            <button type="button" class="hotspot" data-id="4">4</button>
+            <button type="button" class="hotspot active" data-id="5">5</button>
         </div>
 
         <!-- 우측 상세 정보 카드 -->
