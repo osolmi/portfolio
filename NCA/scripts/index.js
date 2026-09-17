@@ -1,4 +1,5 @@
 // index.js
+
 // 1. 헤더 스크롤
 const header = document.querySelector('header');
 const heroSection = document.querySelector('.hero_section');
@@ -45,7 +46,9 @@ const starBtns = document.querySelectorAll('.star-btn');
 const bestSwiper = new Swiper('.best-swiper', {
         slidesPerView: 5,
         spaceBetween: 0,
-        slidesPerGroup: 5, // 5개씩 슬라이드 이동 (총 3페이지 -> 1/3씩 이동)
+        slidesPerGroup: 5,
+        // observer: true,
+        // observerParents: true,
         scrollbar: {
             el: '.best-swiper .swiper-scrollbar',
             draggable: true,

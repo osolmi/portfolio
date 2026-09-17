@@ -2,6 +2,7 @@
     --nca-point:#A8D8CC;
     --nca-dark:#3C3C3C;
     --nca-grey:#7E7E7E;
+    --nca-l-grey:#f9f9f9;
     --nca-white:#fff;
     
     --nca-padding-tb:6.25rem;
@@ -132,8 +133,8 @@ header.is-scrolled .gnb li {
     position: relative;
 }
 .best-swiper .swiper-slide{
-    /* aspect-ratio:3/4; */
-    flex: 1;
+    flex-shrink: 0;
+    height: auto;
 }
 .best-swiper .swiper-slide a {
     display: flex; 
@@ -167,13 +168,14 @@ header.is-scrolled .gnb li {
 
 /* ========================== NEW COLLECTION (바인더) */
 .new_collection { 
-    padding: var(--nca-padding-tb) var(--nca-padding-lr); 
+    padding: var(--nca-padding-tb) 0 ; 
 }
+.new_collection h2 {padding-left: var(--nca-padding-lr);}
 .binder_wrap {
     display: flex;
     position: relative;
     background: #fff;
-    min-height: 500px;
+    min-height: 700px;
 }
 .binder_left {
     flex: 1;
@@ -183,14 +185,18 @@ header.is-scrolled .gnb li {
     position: relative;
     padding: 2rem;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
 }
 .binder_shop_btn {
-    padding: 10px 24px;
-    border: 1px solid var(--nca-dark);
+    padding: 0.875rem 1.25rem;
+    /* border: 1px solid var(--nca-dark); */
     color: var(--nca-dark);
-    font-size: 0.875rem;
-    background: rgba(255, 255, 255, 0.8);
+    max-width: 8.75rem;
+    font-size: 14px; font-weight: 600;
+    background: var(--nca-point);
+    margin-right: 30px;
 }
 .binder_divider {
     position: absolute;
@@ -206,6 +212,7 @@ header.is-scrolled .gnb li {
 .binder_divider img { height: 102%; width: auto; }
 
 .binder_right {
+    position: relative;
     background-image: url(../images/collection/2.jpg);
     background-size: cover;
     background-position: left;
@@ -214,25 +221,35 @@ header.is-scrolled .gnb li {
     display: flex;
     align-items: center;
 }
-.binder_products {
-    width: 100%;
+.binder_right .binder_products {
+    position: absolute; right: 32%; top: -16%;
+    width: 204px; height: fit-content;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    background: var(--nca-white);
 }
 .binder_products li {
-    display: flex;
+    display: flex; flex-flow: column;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #eee;
+    width: 100%; height: 100%;
+    padding: 0.6rem;
+    gap: 0.625rem;
 }
+.binder_products li .img_box {background: var(--nca-l-grey);}
 .binder_products li img {
-    width: 60px;
-    height: 80px;
+    width: 100%;
     object-fit: cover;
 }
-.binder_products li span { font-size: 0.875rem; color: var(--nca-dark); }
+.binder_products li .info_box {
+    display: flex; width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.binder_products li .info_box span {
+    font-size: var(--nca-fsize-s);
+    color: var(--nca-dark);
+}
 
 /* ========================== 룩북 */
 .lookbook{

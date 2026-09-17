@@ -36,6 +36,19 @@ input[type=number] {
     -moz-appearance:none;
     margin:0;
 }
+/* ⭕ Lenis 권장 스타일 설정 */
+html.lenis, html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important; /* CSS 스무스 스크롤 해제 */
+}
+
+/* 가로 스크롤 방지가 꼭 필요하다면 main이나 wrap 요소에 설정 */
+.wrapper {
+    overflow-hidden: hidden;
+}
 @font-face {
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
