@@ -116,14 +116,18 @@ header.is-scrolled .gnb li {
     cursor: pointer;
     width: 24px;
     height: 24px;
-    opacity: 0.6;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    background-image: url('../images/icons/star.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    transition: all 0.3s ease;
 }
 .star-btn.active {
+    background-image: url('../images/icons/star-act.png');
     opacity: 1;
-    transform: scale(1.1);
 }
-.star-btn img { width: 100%; height: auto; object-fit: contain; }
+.star-btn img { display: none; }
 
 /* ========================== 베스트 슬라이드 */
 .best{ padding:var(--nca-padding-tb) var(--nca-padding-lr);}
@@ -144,9 +148,25 @@ header.is-scrolled .gnb li {
 }
 .best-swiper .swiper-slide a img {width: 100%; object-fit: cover;}
 .best-swiper .swiper-slide a span {color: var(--nca-dark); font-size: var(--nca-fsize-s);}
+/* 베스트 섹션 커스텀 스크롤바 트랙 */
+.best-swiper .swiper-scrollbar {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #E5E5E5;
+    margin-top: 3.125rem;
+    border-radius: 0;
+}
+.best-swiper .swiper-scrollbar-drag {
+    background: var(--nca-point);
+    border-radius: 0;
+    width: 50% !important;
+}
 
 /* ========================== 어바웃 */
-.about {display: flex; height: 45.2rem; padding: var(--nca-padding-);}
+.about {display: flex; height: 45.2rem; margin: var(--nca-padding-tb) 0;}
 .about_right { flex: 0.55; }
 .about_right img {width: 100%; height: auto;}
 .about_left {
@@ -253,26 +273,41 @@ header.is-scrolled .gnb li {
 
 /* ========================== 룩북 */
 .lookbook{
-    display:flex; align-items: flex-start;
-    padding: var(--nca-padding-tb) 0;
+    display:flex; align-items: stretch;
+    height: calc(100vh - 6.375rem);
+    /* padding: var(--nca-padding-tb) 0; */
     gap: 1.875rem;
     width: 100%;
+    box-sizing: border-box;
 }
-.lookbook_left {flex: 0.78; min-width: 0;}
-.lookbook_left img {width: 100%; aspect-ratio: 780 / 1040; display: block; object-fit: cover;}
+.lookbook_left {
+    flex: 0 0 665px;
+    width: 665px;   
+    height: 100%;
+    overflow: hidden;
+}
+.lookbook_left img {
+    flex: 1;
+    width: 100%; height: 100%;
+    display: flex;
+    object-fit: contain;
+    display: block;
+}
 .lookbook_right {
     flex: 1;
     min-width: 0;
     display: flex;
-    flex-flow: column;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
-    overflow: hidden;
-    padding: var(--nca-padding-lr) 0;
+    height: 100%;
+    padding: 0 var(--nca-padding-lr);
+    box-sizing: border-box;
 }
 .lookbook-swiper {
     width: 100%;
-    padding: 1.25rem 0;
+    /* padding: 10%; */
     position: relative;
 }
 .lookbook-swiper .swiper-slide{
@@ -281,7 +316,6 @@ header.is-scrolled .gnb li {
     flex-direction: column;
     align-items: center;
 }
-/* ✨ 슬라이드 번호 오른쪽 정렬 */
 .lookbook-swiper .swiper-slide span {
     width: 100%;
     max-width: 360px;
@@ -290,57 +324,87 @@ header.is-scrolled .gnb li {
     color: var(--nca-dark);
     display: block;
 }
-.lookbook-swiper .swiper-slide img {
-    width: 100%;
-    max-width: 360px;
-    aspect-ratio: 360 / 589;
-    object-fit: cover;
+.lookbook-swiper .swiper-slide .img_wrap {
+    position: relative; /* 핫스팟 absolute의 기준점 */
+    display: inline-block;
+    height: 80%; /* 기존 이미지 높이 비율 유지 */
+}
+
+.lookbook-swiper .swiper-slide .img_wrap img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
     display: block;
 }
-.lookbook-swiper .hotspot{
-position: absolute; 
-    top: 45%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1rem; height: 1rem;
-    border: none;
+/* 핫스팟 기본 상태 (비활성화 상태일 때는 투명) */
+.lookbook-swiper .hotspot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
     background: transparent;
+    border: none;
     padding: 0;
-    opacity: 0; 
+    cursor: pointer;
+    z-index: 20;
+    
+    /* 기본 안 보이게 설정 */
+    opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    z-index: 10; /* 이미지 위로 올라오도록 설정 */
-}
-/* 핫스팟 (가운데 활성화 슬라이드에만 표시) */
-.lookbook-swiper .hotspot {
-    position: absolute; 
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 32px; height: 32px;
-    opacity: 0; 
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    cursor: pointer;
 }
 .lookbook-swiper .hotspot img {width: 100%; height: 100%;}
-.lookbook-swiper .swiper-slide-active .hotspot:hover {
-    transform: translate(-50%, -50%) scale(1.1); /* 호버 효과 */
-}
 .lookbook_desc {
     margin-top: 6rem;
     text-align: center;
     color: var(--nca-point);
-    font-size: 0.875rem; font-weight: 600;
+    font-size: var(--nca-fsize-m); font-weight: 600;
     line-height: 1.2;
     text-transform: uppercase;
 }
-/* Swiper가 활성 슬라이드에 자동으로 붙여주는 클래스 */
-.lookbook-swiper .swiper-slide-active .hotspot{
-    opacity:1; pointer-events:auto;
+/* Swiper 활성화 핫스팟 등장 */
+.lookbook-swiper .swiper-slide-active .hotspot {
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
+/* 핫스팟 호버 효과 */
+.lookbook-swiper .swiper-slide-active .hotspot:hover {
+    transform: scale(1.2);
+}
+.lookbook-swiper .swiper-button-next::after,
+.lookbook-swiper .swiper-button-prev::after {
+    display: none;
+}
+/* 개별 핫스팟 위치 지정 (이미지 기준 %) */
+.look1 .hs1 {top: 32%; left: 60%;}
+.look1 .hs2 {top: 55%; left: 44%;}
+.look2 .hs1 {top: 22%; left: 36%;}
+.look2 .hs2 {top: 46%; left: 65%;}
+.look3 .hs1 {top: 22%; left: 36%;}
+.look3 .hs2 {top: 46%; left: 65%;}
+.look4 .hs1 {top: 22%; left: 36%;}
+.look4 .hs2 {top: 46%; left: 65%;}
+.look5 .hs1 {top: 22%; left: 36%;}
+.look5 .hs2 {top: 46%; left: 65%;}
+.look6 .hs1 {top: 22%; left: 36%;}
+.look6 .hs2 {top: 46%; left: 65%;}
+.look7 .hs1 {top: 22%; left: 36%;}
+.look7 .hs2 {top: 46%; left: 65%;}
+.look8 .hs1 {top: 22%; left: 36%;}
+.look8 .hs2 {top: 46%; left: 65%;}
 
+/* 커스텀 화살표 이미지 적용 */
+.lookbook-swiper .swiper-button-prev {
+    background: url('../images/icons/left.png') no-repeat center / contain;
+    width: 38px;
+    height: 57px;
+}
+.lookbook-swiper .swiper-button-next {
+    background: url('../images/icons/right.png') no-repeat center / contain;
+    width: 38px;
+    height: 57px;
+}
 /* ========================== GTL ===== */
+.gtl {padding-top: var(--nca-padding-tb);}
 .gtl h2 {font-size: 4rem; padding-left: var(--nca-padding-lr); margin-bottom: 0.625rem;}
 .gtl p {padding-left: var(--nca-padding-lr); margin-bottom: 1.875rem; color: var(--nca-dark);}
 .gtl_wrap{ display:flex;}

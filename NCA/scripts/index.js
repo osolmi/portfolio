@@ -52,6 +52,7 @@ const bestSwiper = new Swiper('.best-swiper', {
         scrollbar: {
             el: '.best-swiper .swiper-scrollbar',
             draggable: true,
+            snapOnRelease: true,
         },
         breakpoints: {
             0: { slidesPerView: 2, slidesPerGroup: 2 },
@@ -64,8 +65,9 @@ const bestSwiper = new Swiper('.best-swiper', {
 document.addEventListener('DOMContentLoaded', function () {
     // 룩북 Swiper 슬라이더 초기화
     const lookbookSwiper = new Swiper('.lookbook-swiper', {
-        slidesPerView: 1.2,      // 화면에 보일 슬라이드 개수
+        slidesPerView: 3,      // 화면에 보일 슬라이드 개수
         spaceBetween: 0,        // 슬라이드 사이 간격 (px)
+        watchSlidesProgress: true,
         centeredSlides: true,    // 가운데 슬라이드를 활성화 (swiper-slide-active)
         loop: true,              // 무한 순환
         speed: 500,              // 슬라이드 전환 속도
@@ -89,15 +91,140 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     });
 });
-// 5. GET THE LOOK (GTL) 팝업 열기 / 닫기
+// 1. GET THE LOOK 데이터베이스
+const gtlData = [
+    {
+        // data-popup="0" (@biwwwbi)
+        handle: "@biwwwbi",
+        bgImage: "./images/gtl/1.jpg",
+        products: [
+            {
+                img: "./images/products/skirt1.png",
+                name: "Noir pleated skirt",
+                price: "₩58,000",
+                link: "#"
+            },
+            {
+                img: "./images/products/cardigan1.png",
+                name: "Grey Crop Cardigan",
+                price: "₩72,000",
+                link: "#"
+            }
+        ]
+    },
+    {
+        // data-popup="1" (@minnnit)
+        handle: "@minnnit",
+        bgImage: "./images/gtl/2.jpg",
+        products: [
+            {
+                img: "./images/products/skirt1.png",
+                name: "Noir pleated skirt",
+                price: "₩58,000",
+                link: "#"
+            },
+            {
+                img: "./images/products/shirt1.png",
+                name: "White Oversized Shirt",
+                price: "₩64,000",
+                link: "#"
+            }
+        ]
+    },
+    {
+        // data-popup="2" (@reeem_1)
+        handle: "@reeem_1",
+        bgImage: "./images/gtl/3.jpg",
+        products: [
+            {
+                img: "./images/products/top1.png",
+                name: "Basic Crop Top",
+                price: "₩34,000",
+                link: "#"
+            }
+        ]
+    },
+    {
+        // data-popup="3" (@liam0000)
+        handle: "@liam0000",
+        bgImage: "./images/gtl/4.jpg",
+        products: [
+            {
+                img: "./images/products/cap1.png",
+                name: "NCA Logo Ball Cap",
+                price: "₩38,000",
+                link: "#"
+            },
+            {
+                img: "./images/products/pants1.png",
+                name: "Wide Denim Pants",
+                price: "₩89,000",
+                link: "#"
+            }
+        ]
+    },
+    {
+        // data-popup="4" (@chi44_0)
+        handle: "@chi44_0",
+        bgImage: "./images/gtl/5.jpg",
+        products: [
+            {
+                img: "./images/products/acc1.png",
+                name: "Silver Ribbon Necklace",
+                price: "₩28,000",
+                link: "#"
+            }
+        ]
+    }
+];
+
+// 2. DOM 요소 선택 및 이벤트 연동
+document.addEventListener('DOMContentLoaded', () => {
     const gtlItems = document.querySelectorAll('.gtl_wrap > div');
     const popupOverlay = document.querySelector('.popup_overlay');
     const popupCloseBtn = document.querySelector('.popup_close');
 
-    // GTL 이미지 클릭 시 팝업 열기
+    // 팝업 내부 변경될 요소들 선택
+    const popupHandle = document.querySelector('.popup_handle');
+    const popupLeft = document.querySelector('.popup_left');
+    const popupRight = document.querySelector('.popup_right');
+
+    // GTL 이미지 클릭 시 팝업 열기 & 데이터 주입
     gtlItems.forEach(item => {
         item.addEventListener('click', () => {
-            if (popupOverlay) {
+            // HTML의 data-popup="0" 값 가져오기
+            const popupIndex = item.getAttribute('data-popup');
+            const data = gtlData[popupIndex];
+
+            if (data && popupOverlay) {
+                // A. 핸들(@아이디) 변경
+                if (popupHandle) popupHandle.textContent = data.handle;
+
+                // B. 좌측 이미지 변경 (배경 이미지 지정)
+                if (popupLeft) {
+                    popupLeft.style.backgroundImage = `url('${data.bgImage}')`;
+                    popupLeft.style.backgroundSize = 'cover';
+                    popupLeft.style.backgroundPosition = 'center';
+                }
+
+                // C. 우측 상품 목록 동적 생성
+                if (popupRight) {
+                    popupRight.innerHTML = ''; // 기존 HTML 초기화
+                    
+                    data.products.forEach(product => {
+                        const productHTML = `
+                            <div class="popup_product">
+                                <img src="${product.img}" alt="${product.name}">
+                                <p class="popup_name">${product.name}</p>
+                                <p class="popup_price">${product.price}</p>
+                                <a href="${product.link}" class="popup_shop_btn">SHOP NOW</a>
+                            </div>
+                        `;
+                        popupRight.insertAdjacentHTML('beforeend', productHTML);
+                    });
+                }
+
+                // D. 팝업 활성화 클래스 추가
                 popupOverlay.classList.add('is-active');
             }
         });
@@ -118,3 +245,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+});
