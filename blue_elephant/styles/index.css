@@ -8,7 +8,6 @@ Style · CSS
     --signal:#2F3FEF;
     
     --panel:#F4F5F6;
-    --footer-bg:#0F1115;
     
     --font-display:'Syne', sans-serif;
     --font-body:'Inter Tight', sans-serif;
@@ -66,6 +65,7 @@ ul{ margin:0; padding:0; list-style:none; }
     width: 87px;
 }
 .nav__logo img {width: 100%; height: auto;}
+.nav__right {display: flex; align-items: center;}
 .nav__links{
     display:flex;
     gap:28px;
@@ -84,6 +84,9 @@ ul{ margin:0; padding:0; list-style:none; }
 
 /* ============ Hero ============ */
 .hero{
+    display: flex; flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
     position:relative;
     height:85vh;
     min-height:480px;
@@ -244,7 +247,7 @@ ul{ margin:0; padding:0; list-style:none; }
 
 /* ============ Footer ============ */
 .footer{
-    background:var(--footer-bg);
+    background:var(--ink);
     color:#fff;
     padding:64px var(--edge) 28px;
 }
