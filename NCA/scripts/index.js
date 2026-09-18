@@ -4,12 +4,25 @@
 const header = document.querySelector('header');
 const heroSection = document.querySelector('.hero_section');
 
-window.addEventListener('scroll', () => {
-    // 히어로 섹션의 높이보다 스크롤이 더 내려갔을 때
-    if (window.scrollY >= heroSection.offsetHeight) {
-        header.classList.add('is-scrolled');
-    } else {
-        header.classList.remove('is-scrolled');
+document.addEventListener('DOMContentLoaded', function () {
+    const header = document.querySelector('header');
+    const headerLogo = document.querySelector('.gnb h1 img');
+    const heroSection = document.querySelector('.hero-swiper'); // 히어로 배너 섹션
+
+    if (headerLogo && heroSection) {
+        window.addEventListener('scroll', function () {
+            const heroHeight = heroSection.offsetHeight; // 히어로 배너 높이 계산
+
+            if (window.scrollY > heroHeight) {
+                // 히어로 배너를 지났을 때: 민트 로고로 교체 및 클래스 추가
+                headerLogo.src = './images/logo_mint.png';
+                header.classList.add('is-scrolled');
+            } else {
+                // 히어로 배너 영역 내부일 때: 기본 로고 복원 및 클래스 제거
+                headerLogo.src = './images/logo.png';
+                header.classList.remove('is-scrolled');
+            }
+        });
     }
 });
 
@@ -45,7 +58,7 @@ const starBtns = document.querySelectorAll('.star-btn');
 // 3. best 슬라이드
 const bestSwiper = new Swiper('.best-swiper', {
         slidesPerView: 5,
-        spaceBetween: 0,
+        spaceBetween: 20,
         slidesPerGroup: 5,
         // observer: true,
         // observerParents: true,
@@ -64,22 +77,25 @@ const bestSwiper = new Swiper('.best-swiper', {
 // 4. 룩북 슬라이더
 document.addEventListener('DOMContentLoaded', function () {
     // 룩북 Swiper 슬라이더 초기화
-    const lookbookSwiper = new Swiper('.lookbook-swiper', {
-        slidesPerView: 3,      // 화면에 보일 슬라이드 개수
-        spaceBetween: 0,        // 슬라이드 사이 간격 (px)
+const lookbookSwiper = new Swiper('.lookbook-swiper', {
+        initialSlide: 1,
+        slidesPerView: 1,
+        spaceBetween: 20,
         watchSlidesProgress: true,
-        centeredSlides: true,    // 가운데 슬라이드를 활성화 (swiper-slide-active)
-        loop: true,              // 무한 순환
-        speed: 500,              // 슬라이드 전환 속도
-        
-        // 반응형 설정 (피그마 디자인에 맞춰 조정)
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 6,
+        loopAdditionalSlides: 2,
+        speed: 500,
+
+        // 반응형 설정
         breakpoints: {
             768: {
                 slidesPerView: 2,
                 spaceBetween: 30,
             },
             1024: {
-                slidesPerView: 3,  // 1024px 이상에서는 3개씩 보기
+                slidesPerView: 3,  // 1024px 이상에서는 3개
                 spaceBetween: 40,
             }
         },
@@ -99,16 +115,16 @@ const gtlData = [
         bgImage: "./images/gtl/1.jpg",
         products: [
             {
-                img: "./images/products/skirt1.png",
+                img: "./images/best/4.png",
                 name: "Noir pleated skirt",
                 price: "₩58,000",
-                link: "#"
+                link: "#shop"
             },
             {
-                img: "./images/products/cardigan1.png",
+                img: "./images/best/4.png",
                 name: "Grey Crop Cardigan",
                 price: "₩72,000",
-                link: "#"
+                link: "#shop"
             }
         ]
     },
@@ -118,16 +134,16 @@ const gtlData = [
         bgImage: "./images/gtl/2.jpg",
         products: [
             {
-                img: "./images/products/skirt1.png",
+                img: "./images/best/4.png",
                 name: "Noir pleated skirt",
                 price: "₩58,000",
-                link: "#"
+                link: "#shop"
             },
             {
-                img: "./images/products/shirt1.png",
+                img: "./images/best/4.png",
                 name: "White Oversized Shirt",
                 price: "₩64,000",
-                link: "#"
+                link: "#shop"
             }
         ]
     },
@@ -137,10 +153,10 @@ const gtlData = [
         bgImage: "./images/gtl/3.jpg",
         products: [
             {
-                img: "./images/products/top1.png",
+                img: "./images/best/4.png",
                 name: "Basic Crop Top",
                 price: "₩34,000",
-                link: "#"
+                link: "#shop"
             }
         ]
     },
@@ -150,16 +166,16 @@ const gtlData = [
         bgImage: "./images/gtl/4.jpg",
         products: [
             {
-                img: "./images/products/cap1.png",
+                img: "./images/best/4.png",
                 name: "NCA Logo Ball Cap",
                 price: "₩38,000",
-                link: "#"
+                link: "#shop"
             },
             {
-                img: "./images/products/pants1.png",
+                img: "./images/best/4.png",
                 name: "Wide Denim Pants",
                 price: "₩89,000",
-                link: "#"
+                link: "#shop"
             }
         ]
     },
@@ -172,7 +188,7 @@ const gtlData = [
                 img: "./images/products/acc1.png",
                 name: "Silver Ribbon Necklace",
                 price: "₩28,000",
-                link: "#"
+                link: "#shop"
             }
         ]
     }
@@ -213,12 +229,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     data.products.forEach(product => {
                         const productHTML = `
-                            <div class="popup_product">
-                                <img src="${product.img}" alt="${product.name}">
-                                <p class="popup_name">${product.name}</p>
-                                <p class="popup_price">${product.price}</p>
-                                <a href="${product.link}" class="popup_shop_btn">SHOP NOW</a>
-                            </div>
+                        <div class="popup_product">
+                            <a href="${product.link}">
+                                <div class="img_box">
+                                    <img src="${product.img}" alt="${product.name}">
+                                </div>
+                                <div class="info_box">
+                                    <span class="title">${product.name}</span>
+                                    <span class="price">${product.price}</span>
+                                </div>
+                            </a>
+                            <a href="${product.link}" class="popup_shop_btn">SHOP NOW</a>
+                        </div>
                         `;
                         popupRight.insertAdjacentHTML('beforeend', productHTML);
                     });
