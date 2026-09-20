@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>블루엘리펀트</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- 1. Google Fonts - Chivo Mono 웹폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -35,8 +38,8 @@
     </header>
     <main>
         <!-- ============ Hero ============ -->
-        <section class="hero">
-            <div class="hero__img" style="background-image:url('./images/hero.jpg'); background-size:cover; background-position:center;"></div>
+        <section class="hero" style="background-image:url('./images/hero.jpg'); background-size:cover; background-position:center;">
+            <!-- <div class="hero__img"></div> -->
             <div class="hero__content">
                 <h1 class="hero__title"><img src="./images/logo.png" alt=""></h1>
                 <p class="hero__cord">SEOUL, KOREA — 37° 33' 58.97" N, 126° 58' 39.78" E</p>
@@ -53,26 +56,26 @@
                         <div>
                             <p class="section-index">01 / BESTSELLERS</p>
                             <div class="tab-group">
-                                <button class="tab is-active" data-tab="sunglasses">[ SUNGLASSES ]</button>
-                                <button class="tab" data-tab="glasses">[ GLASSES ]</button>
+                                <button class="tab is-active bracket__wrap" data-tab="sunglasses"><span class="bracket">[</span> SUNGLASSES <span class="bracket">]</span></button>
+                                <button class="tab bracket__wrap" data-tab="glasses"><span class="bracket">[</span> GLASSES <span class="bracket">]</span></button>
                             </div>
                         </div>
-                        <a href="#shop" class="see-more">SEE MORE<img class="arrow" src="" alt="arrow"></a>
+                        <a href="#shop" class="see-more">SEE MORE<img class="arrow" src="./images/arrow.png" alt="arrow"></a>
                     </div>
                 
                     <div class="product-row">
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
+                        <a href="#shop" class="product-card">
+                            <div class="product-card__img"><img src="./images/products/LOOM grey.png" alt=""></div>
                             <p class="product-card__name">LOOM grey</p>
                             <p class="product-card__price">49,900₩</p>
                         </a>
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
+                        <a href="#shop" class="product-card">
+                            <div class=" product-card__img"><img src="./images/products/LOOM grey.png" alt=""></div>
                             <p class="product-card__name">LOOM grey</p>
                             <p class="product-card__price">49,900₩</p>
                         </a>
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
+                        <a href="#shop" class="product-card">
+                            <div class=" product-card__img"><img src="./images/products/LOOM grey.png" alt=""></div>
                             <p class="product-card__name">LOOM grey</p>
                             <p class="product-card__price">49,900₩</p>
                         </a>
@@ -87,71 +90,109 @@
             </div>
         </section>
         <!-- ============ Editorial split (2-up) ============ -->
-        <section class="editorial-split">
-            <div class="placeholder editorial-split__img"></div>
-            <div class="placeholder editorial-split__img"></div>
-        </section>
+    <section class="editorial-split">
+        <a href="#shop" class="editorial-tile editorial-tile--static">
+            <div class=" editorial-split__img"></div>
+            <div class="editorial-tile__content">
+                <p class="editorial-tile__label">SUNGLASSES</p>
+                <p class="editorial-tile__cta"><span class="bracket">[</span> VIEW ALL <span class="arrow">→</span> <span class="bracket">]</span></p>
+            </div>
+        </a>
+    
+        <a href="#shop" class="editorial-tile editorial-tile--hover">
+            <div class=" editorial-split__img"></div>
+            <div class="editorial-tile__scrim"></div>
+            <div class="editorial-tile__content">
+                <p class="editorial-tile__label">GLASSES</p>
+                <p class="editorial-tile__cta"><span class="bracket">[</span> VIEW ALL <span class="arrow">→</span> <span class="bracket">]</span></p>
+            </div>
+        </a>
+    
+    </section>
+        <!-- <section class="editorial-split">
+            <div class=" editorial-split__sunglasses">
+                <span></span>
+                <img src="" alt="">
+            </div>
+            <div class=" editorial-split__glasses"></div>
+        </section> -->
         
         <!-- ============ Discover / Category ============ -->
         <section class="section discover">
             <div class="discover__grid">
+                <!-- 좌측 대형 이미지 (100vh 고정) -->
                 <div class="discover__feature" style="background-image:url('./images/col_big.jpg'); background-size:cover; background-position:center;"></div>
-        
+
+                <!-- 우측 컨텐츠 영역 -->
                 <div class="discover__body">
-                    <a href="#shop" class="discover-all">
-                        [ DISCOVER ALL <img class="arrow" src="" alt=""> ]
-                    </a>
-                    <p class="section-index">03 / COLLECTION</p>
-            
-                    <div class="spotlight">
-                        <span class="spotlight__index">[ 01 ]</span>
-                        <div class="spotlight__img" style="background-image:url('./images/col_1.jpg'); background-size:cover; background-position:center;"></div>
-                        <p class="spotlight__name">FLUXO</p>
-                        <p class="spotlight__variant">pearl black</p>
-                    </div>
-        
-                    <div class="spotlight">
-                        <span class="spotlight__index">[ 02 ]</span>
-                        <div class="spotlight__img" style="background-image:url('./images/col_2.jpg'); background-size:cover; background-position:center;"></div>
-                        <p class="spotlight__name">FLUXO</p>
-                        <p class="spotlight__variant">pearl black</p>
-                    </div>
-            
-                    <div class="category-head">
-                        <div>
-                        <p class="section-index">01 / CATEGORY</p>
-                        <div class="tab-group">
-                            <button class="tab is-active" data-tab="sunglasses2">[ SUNGLASSES ]</button>
-                            <button class="tab" data-tab="glasses2">[ GLASSES ]</button>
+                    <!-- [첫 화면 100vh 뷰: 01 + 02 영역] -->
+                    <div class="discover__hero-view">
+                        <div class="discover__top">
+                            <div class="discover__index">
+                                <a href="#shop" class="discover-all bracket__wrap">
+                                    <span class="bracket">[</span>
+                                    DISCOVER ALL
+                                    <img class="arrow" src="./images/arrow.png" alt="arrow">
+                                    <span class="bracket">]</span>
+                                </a>
+                                <p class="section-index">03 / COLLECTION</p>
+                            </div>
+                            <div class="spotlight spotlight--01">
+                                <span class="spotlight__index">[ 01 ]</span>
+                                <div class="spotlight__img1" style="background-image:url('./images/col_1.jpg'); background-size:cover; background-position:center;"></div>
+                                <div class="spotlight__info">
+                                    <p class="spotlight__name">FLUXO</p>
+                                    <p class="spotlight__variant">pearl black</p>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="spotlight spotlight--02">
+                            <span class="spotlight__index">[ 02 ]</span>
+                            <div class="spotlight__img2" style="background-image:url('./images/col_2.jpg'); background-size:cover; background-position:center;"></div>
+                            <div class="spotlight__info">
+                                <p class="spotlight__name">LOOM</p>
+                                <p class="spotlight__variant">grey</p>
+                            </div>
                         </div>
-                        <a href="#shop" class="see-more">See More →</a>
                     </div>
-        
-                    <div class="category-grid">
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
-                            <p class="product-card__name">LOOM grey</p>
-                            <p class="product-card__price">49,900₩</p>
-                        </a>
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
-                            <p class="product-card__name">LOOM grey</p>
-                            <p class="product-card__price">49,900₩</p>
-                        </a>
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
-                            <p class="product-card__name">LOOM grey</p>
-                            <p class="product-card__price">49,900₩</p>
-                        </a>
-                        <a href="#" class="product-card">
-                            <div class="placeholder product-card__img"></div>
-                            <p class="product-card__name">LOOM grey</p>
-                            <p class="product-card__price">49,900₩</p>
-                        </a>
+
+                    <!-- [스크롤 시 내려오는 카테고리 영역] -->
+                    <div class="category">
+                        <div class="category-head">
+                            <div>
+                                <div class="tab-group">
+                                    <button class="tab is-active bracket__wrap" data-tab="sunglasses2"><span class="bracket">[</span> SUNGLASSES <span class="bracket">]</span></button>
+                                    <button class="tab bracket__wrap" data-tab="glasses2"><span class="bracket">[</span> GLASSES <span class="bracket">]</span></button>
+                                </div>
+                            </div>
+                            <a href="#shop" class="see-more">SEE MORE<img class="arrow" src="./images/arrow.png" alt=""></a>
+                        </div>
+
+                        <div class="category-grid">
+                            <a href="#" class="product-card">
+                                <div class=" product-card__img"></div>
+                                <p class="product-card__name">LOOM grey</p>
+                                <p class="product-card__price">49,900₩</p>
+                            </a>
+                            <a href="#" class="product-card">
+                                <div class=" product-card__img"></div>
+                                <p class="product-card__name">LOOM grey</p>
+                                <p class="product-card__price">49,900₩</p>
+                            </a>
+                            <a href="#" class="product-card">
+                                <div class=" product-card__img"></div>
+                                <p class="product-card__name">LOOM grey</p>
+                                <p class="product-card__price">49,900₩</p>
+                            </a>
+                            <a href="#" class="product-card">
+                                <div class=" product-card__img"></div>
+                                <p class="product-card__name">LOOM grey</p>
+                                <p class="product-card__price">49,900₩</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
-        
             </div>
         </section>
     </main>
@@ -184,7 +225,7 @@
                     <a href="#">[TIKTOK]</a>
                 </div>
             </div>
-            <div class="footer__wordmark"><img src="" alt="logo"></div>
+            <div class="footer__wordmark"><img src="./images/logo_footer.png" alt="logo"></div>
         </div>
         <div class="footer__bottom">
             <span>© 2026 BLUE ELEPHANT</span>
@@ -195,11 +236,11 @@
     <div class="fab" id="fab">
         <div class="fab__toggle" id="themeToggle" role="switch" aria-checked="false" aria-label="다크모드 전환">
             <span class="fab__toggle-icon fab__toggle-icon--sun">
-                <img src="" alt="sun">
+                <img src="./images/icon_sun.png" alt="sun">
             </span>
             <span class="fab__toggle-knob"></span>
             <span class="fab__toggle-icon fab__toggle-icon--moon">
-                <img src="" alt="moon">
+                <img src="./images/icon_moon_off.png" alt="moon">
             </span>
         </div>
     
@@ -207,12 +248,12 @@
     
         <div class="fab__list" id="fabList">
             <a href="#" class="fab__item">
-                <div class="placeholder fab__item-img"></div>
+                <div class=" fab__item-img"></div>
                 <p class="fab__item-name">LOOM grey</p>
                 <p class="fab__item-price">49,900₩</p>
             </a>
             <a href="#" class="fab__item">
-                <div class="placeholder fab__item-img"></div>
+                <div class=" fab__item-img"></div>
                 <p class="fab__item-name">LOOM grey</p>
                 <p class="fab__item-price">49,900₩</p>
             </a>
