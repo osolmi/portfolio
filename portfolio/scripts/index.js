@@ -56,8 +56,8 @@ const projects = [
     {
         num: '01',
         category: 'Web Design',
-        title: 'Sirloin Redesign',
-        tag: '',
+        title: 'Sirloin',
+        tag: 'Redesign',
         href: 'project-sirloin.html',
         thumb: '', // 준비되면 이미지 경로 입력 (예: assets/img/sirloin/thumb.webp)
     },
@@ -80,7 +80,7 @@ const projects = [
     {
         num: '04',
         category: 'Web Design',
-        title: '', // 아직 미정
+        title: 'Blue Elephant', // 아직 미정
         tag: 'Redesign',
         href: 'project-04.html',
         thumb: '',
@@ -92,11 +92,11 @@ const worksIndex = document.querySelector('.works-index');
     if (worksIndex){
     worksIndex.innerHTML = projects.map(p => `
         <a class="works-index__panel" href="${p.href}" data-index="${p.num}" data-cursor="Explore">
-        <div class="panel__thumb" style="${p.thumb ? `background-image:url('${p.thumb}')` : ''}"></div>
-        <span class="panel__num">${p.num}</span>
-        <span class="panel__arrow">↗</span>
-        <span class="panel__category">${p.category}</span>
-        <span class="panel__title">${p.title}</span>
+            <div class="panel__thumb" style="${p.thumb ? `background-image:url('${p.thumb}')` : ''}"></div>
+            <span class="panel__num">${p.num}</span>
+            <span class="panel__arrow">↗</span>
+            <span class="panel__category">${p.category}</span>
+            <span class="panel__title">${p.title}</span>
         ${p.tag ? `<span class="panel__tag">${p.tag}</span>` : ''}
         </a>
     `).join('');
