@@ -59,7 +59,7 @@ const projects = [
         title: 'Sirloin',
         tag: 'Redesign',
         href: 'project-sirloin.html',
-        thumb: '', // 준비되면 이미지 경로 입력 (예: assets/img/sirloin/thumb.webp)
+        thumb: './images/sirloin.jpg', // 준비되면 이미지 경로 입력 (예: assets/img/sirloin/thumb.webp)
     },
     {
         num: '02',
@@ -67,7 +67,7 @@ const projects = [
         title: 'Herman Miller',
         tag: 'Redesign',
         href: 'project-hermanmiller.html',
-        thumb: '',
+        thumb: './images/hermanmiller.jpg',
     },
     {
         num: '03',
@@ -75,15 +75,15 @@ const projects = [
         title: 'Not cute Anymore',
         tag: 'New Identity',
         href: 'project-notcuteanymore.html',
-        thumb: '',
+        thumb: './images/notcuteanymore2.jpg',
     },
     {
         num: '04',
         category: 'Web Design',
         title: 'Blue Elephant', // 아직 미정
         tag: 'Redesign',
-        href: 'project-04.html',
-        thumb: '',
+        href: 'project-blueelephant.html',
+        thumb: './images/blueelephant.jpg',
     },
 ];
 
