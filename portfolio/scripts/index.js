@@ -101,3 +101,79 @@ const worksIndex = document.querySelector('.works-index');
         </a>
     `).join('');
 }
+
+/* ==========================================================
+   GRAPHIC — 포스터 데이터
+   포스터 완성되는 대로 img 경로만 채우면 됨 (빈 문자열이면 회색 박스 유지)
+   ========================================================== */
+const posters = [
+  { num: '01', img: '' },
+  { num: '02', img: '' },
+  { num: '03', img: '' },
+  { num: '04', img: '' },
+  { num: '05', img: '' },
+];
+
+const graphicListEl = document.querySelector('.graphic__list');
+const posterPreviewEl = document.querySelector('.graphic__poster');
+
+/* ---- 배열 기반 렌더링 ---- */
+if (graphicListEl){
+    graphicListEl.innerHTML = posters.map((p, i) => `
+        <li class="graphic__thumb-wrap" data-index="${i}">
+        <span class="graphic__num">${p.num}</span>
+        <div class="graphic__thumb" style="${p.img ? `background-image:url('${p.img}')` : ''}"></div>
+        </li>
+    `).join('');
+}
+
+/* ---- 중앙 포커스 감지 ----
+    read-write batching: 8~10개 항목을 순회하며 "읽기(위치 측정)"와
+    "쓰기(클래스 토글)"를 섞어서 하면 매번 강제 리플로우가 발생함.
+    그래서 전부 읽어서 계산부터 끝내고, 그다음에 한 번에 몰아서 씀 */
+function updateActiveThumb(){
+    const items = document.querySelectorAll('.graphic__thumb-wrap');
+    if (!items.length || !graphicListEl) return;
+
+    // 1) 읽기만 먼저 — 리스트 컨테이너 자신의 중앙 Y좌표 기준으로 거리 계산
+    const containerRect = graphicListEl.getBoundingClientRect();
+    const containerCenter = containerRect.top + containerRect.height / 2;
+
+    const distances = Array.from(items).map(item => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.top + rect.height / 2;
+        return Math.abs(itemCenter - containerCenter);
+    });
+
+    const closestIndex = distances.indexOf(Math.min(...distances));
+
+  // 2) 쓰기만 나중에 몰아서
+    items.forEach((item, i) => {
+        item.classList.toggle('is-active', i === closestIndex);
+    });
+
+    const active = posters[closestIndex];
+    if (active && posterPreviewEl){
+        posterPreviewEl.style.backgroundImage = active.img ? `url('${active.img}')` : '';
+    }
+}
+
+let tickingGraphic = false;
+graphicListEl?.addEventListener('scroll', () => {
+    if (!tickingGraphic){
+        requestAnimationFrame(() => {
+        updateActiveThumb();
+        tickingGraphic = false;
+        });
+        tickingGraphic = true;
+    }
+});
+
+/* 클릭한 썸네일이 화면 중앙으로 부드럽게 스크롤 */
+graphicListEl?.addEventListener('click', (e) => {
+    const wrap = e.target.closest('.graphic__thumb-wrap');
+    if (wrap) wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+/* 최초 로드 시 01번이 활성 상태로 보이도록 1회 실행 */
+window.addEventListener('load', updateActiveThumb);

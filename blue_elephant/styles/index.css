@@ -127,12 +127,12 @@ main {
 .arrow {width: 1.5rem; height: auto;}
 
 /* ============ Bracket Link Interaction ============
-[ TEXT ] 형태 요소 전체에 적용되는 호버 인터랙션.
-- 기본 간격은 .bracket__wrap의 gap: 0.5rem 그대로 사용
-- 호버 시 gap이 0으로 스프링 이징(overshoot)으로 접히며 대괄호가 텍스트에 달라붙음
-- 동시에 안쪽 텍스트가 짧게 한 번 깜빡임(flash)
-- 대상 요소는 scripts/index.js의 initBracketLinks()가 자동으로
-    .bracket-link 클래스와 .bracket-text 래핑을 부여함 (HTML 수정 불필요)
+   [ TEXT ] 형태 요소 전체에 적용되는 호버 인터랙션.
+   - 기본 간격은 .bracket__wrap의 gap: 0.5rem 그대로 사용
+   - 호버 시 gap이 0으로 스프링 이징(overshoot)으로 접히며 대괄호가 텍스트에 달라붙음
+   - 동시에 안쪽 텍스트가 짧게 한 번 깜빡임(flash)
+   - 대상 요소는 scripts/index.js의 initBracketLinks()가 자동으로
+     .bracket-link 클래스와 .bracket-text 래핑을 부여함 (HTML 수정 불필요)
 ============================================================ */
 .bracket-link{
     display: inline-flex;
@@ -155,13 +155,13 @@ main {
 .bracket-link:hover .bracket-text{
     animation: bracketFlash .3s ease;
 }
- 
+
 @keyframes bracketFlash{
     0%{ opacity: 1; }
     35%{ opacity: .15; }
     100%{ opacity: 1; }
 }
- 
+
 .section { padding: 5.5rem var(--edge); } /* 88px */
 .section-index {
     font-family: var(--font-mono);
@@ -208,6 +208,7 @@ main {
 .product-card__img img{ width:100%; height:100%; object-fit:cover; display:block; }
 
 /* ============ Bestsellers ============ */
+/* ============ Bestsellers (무한 팽창 방지 완벽 수정본) ============ */
 .bestsellers {
     padding: 0 var(--edge);
     box-sizing: border-box;
@@ -215,16 +216,18 @@ main {
 
 .bestsellers__grid {
     display: grid;
-    grid-template-columns: 1fr 2.2fr; /* 240px, 340px */
-    gap: 1.25rem; /* 20px */
-
+    grid-template-columns: minmax(0, 1fr) 2.2fr; /* [수정] minmax(0, 1fr)로 무한 루프 방지 */
+    gap: 1.25rem;
+    align-items: start; /* 우측 높이에 맞춰 늘어나는 것 방지 */
 }
 
 .bestsellers__feature {
+    width: 100%;
     aspect-ratio: 1 / 1;
+    min-width: 0;        /* [핵심] Grid 내부 무한 크기 계산 차단 */
+    object-fit: cover;
     background-size: cover;
     background-position: center;
-    transition: background-image .2s ease;
 }
 
 .bestsellers__head {
@@ -324,7 +327,7 @@ main {
     transition:color .2s ease;
 }
 .editorial-tile:hover .editorial-tile__cta{ color:var(--signal); }
- 
+
 .editorial-tile--hover .editorial-tile__scrim{
     position:absolute;
     inset:0;
@@ -459,18 +462,18 @@ main {
     align-items: flex-start;
     margin-bottom: 0.625rem;
 }
- 
+
 .category-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--gutter);
 }
- 
+
 @media (max-width: 50rem) { /* 800px */
     .discover__grid { grid-template-columns: 1fr; }
     .discover__feature { aspect-ratio: 16/9; position: static; }
 }
- 
+
 /* ============ Footer ============ */
 .footer {
     background: var(--ink);
@@ -520,7 +523,7 @@ main {
     .footer__wordmark { grid-column: 1/-1; text-align: left; margin-top: 1.25rem; } /* 20px */
     .footer__bottom { flex-direction: column; gap: 0.5rem; } /* 8px */
 }
- 
+
 /* ============ Fixed FAB ============ */
 .fab {
     position: fixed;
@@ -539,7 +542,7 @@ main {
     gap: 0.625rem; /* 10px */
     transition: background .3s ease;
 }
- 
+
 .fab__toggle {
     width: 100%; height: 3.219rem; /* 50px */
     border-radius: 100px;
@@ -603,7 +606,7 @@ html[data-theme="dark"] .fab__toggle-knob { transform: translateX(1.5rem); } /* 
 .fab__item-img { aspect-ratio: 1/1; border-radius: 0.5rem; margin-bottom: 0.5rem; background: var(--panel); } /* 8px */
 .fab__item-name { font-size: 0.688rem; font-weight: 500; margin: 0; color: var(--ink); } /* 11px */
 .fab__item-price { font-size: 0.688rem; color: var(--stone); margin: 0.125rem 0 0; } /* 11px, 2px */
- 
+
 .fab__add {
     width: 2.25rem; height: 2.25rem; /* 36px */
     border-radius: 50%;
