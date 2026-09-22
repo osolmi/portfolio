@@ -116,7 +116,8 @@ a, button, [data-cursor]{
     height: 60px;
     background: var(--gray);
     display: block;
-    position:absolute; left: 50%;
+    position:absolute; left: 50%; top:50%;
+    transform:translate(-50%,-50%);
 } */
 
 /* ------------------------slide wrapper - 세로 scroll */
@@ -434,7 +435,7 @@ a, button, [data-cursor]{
     top: var(--nav-h); right:var(--panel-padding);
     z-index: 1;
     font-size: 18px;
-    color: var(--ink);
+    color: var(--black);
     opacity: 0;
     transform: translate(-4px, 4px);
     transition: opacity .3s ease, transform .3s ease;
@@ -458,7 +459,7 @@ a, button, [data-cursor]{
     bottom: var(--panel-padding); right: var(--panel-padding);
     z-index: 1;
     font-size: 12px;
-    color: var(--stone);
+    color: var(--gray);
 }
 /* ================= Work Hover Text Color Transition ================= */
 
@@ -490,10 +491,11 @@ a, button, [data-cursor]{
 }
 /* ================= Graphic ================= */
 :root{
-  --graphic-top-pad: 100px;   /* nav 높이 감안한 상단 여백 */
-  --graphic-bottom-pad: 40px;
-  --graphic-thumb-w: 80px;    /* 넘버 리스트 썸네일 크기 */
-  --graphic-thumb-h: 115px;
+    --graphic-top-pad: 100px;   /* nav 높이 감안한 상단 여백 */
+    --graphic-bottom-pad: 40px;
+    --graphic-thumb-w: 80px;    /* 넘버 리스트 썸네일 크기 */
+    --graphic-thumb-h: 115px;
+    --graphic-num-w: 32px;
 }
 
 .slide--graphic{
@@ -528,7 +530,7 @@ a, button, [data-cursor]{
     letter-spacing: 0.05em;
     line-height: 1;
     margin-left: 0.2em;
-    vertical-align: top;      /* position/top 대신 이걸로 교체 */
+    vertical-align: top;
 }
 
 .graphic__body{
@@ -546,7 +548,7 @@ a, button, [data-cursor]{
    %는 padding-top/bottom에서 "부모의 너비" 기준으로 계산되는 CSS 함정이 있어서
    반드시 vh 기반 calc()로 계산해야 함 */
 .graphic__list{
-    width: var(--graphic-thumb-w);
+    width: calc(var(--graphic-thumb-w) + var(--graphic-num-w));
     flex-shrink: 0;
     height: 100%;
     overflow-y: scroll;
@@ -565,22 +567,23 @@ a, button, [data-cursor]{
     position: relative;
     width: var(--graphic-thumb-w);
     height: var(--graphic-thumb-h);
-    margin: 14px auto; /* 컬럼 폭 = 썸네일 폭이라 항상 가로 중앙에 위치 */
+    margin: 14px 0 14px var(--graphic-num-w);
     scroll-snap-align: center;
     cursor: pointer;
 }
 
 .graphic__num{
     position: absolute;
-    left: -28px; top: 0;
+    left: calc(var(--graphic-num-w) * -1 + 4px);
+    top: 0;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--black, #17171A);
 }
 
 .graphic__thumb{
     width: 100%; height: 100%;
-    background: var(--line, #DCD8CE);
+    background: var(--white, #DCD8CE);
     background-size: cover;
     background-position: center;
     opacity: 0.35;
