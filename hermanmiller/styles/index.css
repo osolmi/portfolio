@@ -579,12 +579,12 @@ html, body {
 .main-image-wrap {
     position: relative;
     display: inline-block;
-    width: 100%;
+    width: 100%; height: 100%;
 }
 .hotspot {
     position: absolute;
     z-index: 10;
-    transform: translate(-50%, -50%); /* 핫스팟의 중심을 해당 좌표에 맞춤 */
+    transform: translate(-50%, -50%);
     width: 20px;
     height: 20px;
     border-radius: 50%;
